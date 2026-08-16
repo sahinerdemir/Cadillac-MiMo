@@ -318,12 +318,28 @@ body {
    ========================================================================== */
 
 @media (max-width: 600px) {
+  /* Lock viewport and prevent scrolling on mobile devices */
+  html, body {
+    height: 100dvh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+
   html {
     font-size: 14px;
   }
   
   .page-wrapper {
     padding: 1.5rem 1rem;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .content-container {
+    height: 100%;
+    min-height: 100%;
   }
   
   .logo-wrapper {
@@ -331,11 +347,18 @@ body {
     height: 100px;
   }
   
-
-  
-  /* Center the map pin on mobile viewports so it doesn't get cut off */
+  /* Position map pin on mobile vertically between logo (centered) and top edge */
   .map-container iframe {
     left: 0;
     width: 100vw;
+    top: -55dvh;
+    height: 155dvh;
+  }
+
+  /* Fade out bottom of the map on mobile to make footer icons highly visible */
+  .map-overlay {
+    background: 
+      linear-gradient(to bottom, transparent 30%, var(--bg-light) 90%),
+      radial-gradient(circle at center, transparent 40%, var(--bg-light) 95%);
   }
 }
