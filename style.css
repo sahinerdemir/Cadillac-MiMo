@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Cadillac MiMo Hotel Coming Soon Page CSS
+   Theme: Miami Modern Retro-Luxury (Premium Light Mode)
+   ========================================================================== */
+
+/* Design Tokens & Variables */
+:root {
+  --bg-light: #f7f9fc;
+  --bg-gradient: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f3f8 100%);
+  
+  /* MiMo Palette for Light Mode */
+  --accent-teal: #00a4b4;
+  --accent-pink: #e03274;
+  --accent-gold: #cfa856;
+  
+  /* Typography */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-light);
+  background: var(--bg-gradient);
+  color: #111625;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Background Google Map Styling (Light Mode) */
+.map-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.52; /* Highly visible light map */
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: -50vw; /* Shift map center (the pin) to 25vw (left side) */
+  width: 150vw; /* Make wider to fully cover screen width (150vw - 50vw = 100vw) */
+  height: 100%;
+  border: 0;
+  /* Make the map black and white, bright and silver-toned */
+  filter: grayscale(100%) contrast(1.12) brightness(1.05);
+}
+
+.map-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Light soft vignetting overlay to draw eyes to the center logo */
+  background: radial-gradient(circle at center, transparent 50%, var(--bg-light) 95%);
+  z-index: 2;
+}
+
+/* Page Layout Wrapper */
+.page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+}
+
+/* Subtle background glowing orb */
+.glow-backdrop {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 164, 180, 0.05) 0%, rgba(224, 50, 116, 0.02) 50%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Central Content Container */
+.content-container {
+  width: 100%;
+  max-width: 620px;
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styling and Pulsing Backlight */
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  height: 140px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.hotel-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Original black SVG paths match light background. Apply clean soft shadow */
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+  z-index: 5;
+}
+
+/* Elegant Dialog Popup styling */
+.coming-soon-dialog {
+  border: none;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 24px 60px rgba(17, 22, 37, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  max-width: 420px;
+  width: calc(100% - 2.5rem);
+  padding: 3rem 2.5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  color: #111625;
+  outline: none;
+  z-index: 100;
+  
+  /* Entry/Exit animations with starting-style */
+  opacity: 0;
+  transform: translate(-50%, -46%) scale(0.95);
+  transition: opacity 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), display 0.35s allow-discrete;
+}
+
+.coming-soon-dialog[open] {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@starting-style {
+  .coming-soon-dialog[open] {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.95);
+  }
+}
+
+.coming-soon-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(0px);
+  opacity: 0;
+  transition: opacity 0.35s ease, backdrop-filter 0.35s ease, display 0.35s allow-discrete;
+}
+
+.coming-soon-dialog[open]::backdrop {
+  opacity: 1;
+  backdrop-filter: blur(6px);
+}
+
+@starting-style {
+  .coming-soon-dialog[open]::backdrop {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: rgba(17, 22, 37, 0.4);
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #111625;
+  background: rgba(17, 22, 37, 0.05);
+}
+
+.dialog-badge {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent-pink);
+  margin-bottom: 0.85rem;
+}
+
+.coming-soon-dialog h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 1rem;
+  color: #111625;
+}
+
+.coming-soon-dialog p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(17, 22, 37, 0.75);
+}
+
+/* Footer Section */
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.social-icon {
+  color: rgba(17, 22, 37, 0.45);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(17, 22, 37, 0.03);
+  border: 1px solid rgba(17, 22, 37, 0.08);
+}
+
+.social-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.social-icon:hover {
+  color: #111625;
+  background: rgba(17, 22, 37, 0.08);
+  transform: translateY(-2px);
+}
+
+.social-icon#socialInsta:hover {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 12px rgba(224, 50, 116, 0.15);
+  color: var(--accent-pink);
+}
+
+.social-icon#socialFb:hover {
+  border-color: #1877f2;
+  box-shadow: 0 0 12px rgba(24, 119, 242, 0.15);
+  color: #1877f2;
+}
+
+.social-icon#socialMap:hover {
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 12px rgba(0, 164, 180, 0.15);
+  color: var(--accent-teal);
+}
+
+.address {
+  font-size: 0.78rem;
+  color: rgba(17, 22, 37, 0.5);
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-family: var(--font-display);
+}
+
+/* ==========================================================================
+   Media Queries & Responsiveness
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .page-wrapper {
+    padding: 1.5rem 1rem;
+  }
+  
+  .logo-wrapper {
+    max-width: 240px;
+    height: 100px;
+  }
+  
+
+  
+  /* Center the map pin on mobile viewports so it doesn't get cut off */
+  .map-container iframe {
+    left: 0;
+    width: 100vw;
+  }
+}
