@@ -1,5 +1,19 @@
 import fs from 'fs';
 import path from 'path';
+import Redis from 'ioredis';
+
+// Instantiate Redis TCP client globally for Vercel Serverless container reuse
+let redis;
+if (process.env.REDIS_URL) {
+  try {
+    redis = new Redis(process.env.REDIS_URL, {
+      maxRetriesPerRequest: 1,
+      connectTimeout: 5000
+    });
+  } catch (err) {
+    console.error("Redis TCP initialization error:", err);
+  }
+}
 
 export default async function handler(request, response) {
   // CORS Headers
@@ -11,29 +25,16 @@ export default async function handler(request, response) {
     return response.status(200).end();
   }
 
-  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  
-  if (kvUrl && kvToken) {
+  // Retrieve stay instructions from Redis TCP
+  if (redis) {
     try {
-      // Query Vercel KV REST API using command endpoint
-      const res = await fetch(kvUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${kvToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(["GET", "guest_instructions"])
-      });
-      
-      const data = await res.json();
-      
-      if (data && data.result) {
-        const parsed = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+      const data = await redis.get("guest_instructions");
+      if (data) {
+        const parsed = JSON.parse(data);
         return response.status(200).json(parsed);
       }
     } catch (error) {
-      console.error("KV read error, falling back to local file:", error);
+      console.error("Redis TCP read error, falling back to local file:", error);
     }
   }
 

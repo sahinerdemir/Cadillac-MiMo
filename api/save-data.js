@@ -1,3 +1,18 @@
+import Redis from 'ioredis';
+
+// Instantiate Redis TCP client globally for Vercel Serverless container reuse
+let redis;
+if (process.env.REDIS_URL) {
+  try {
+    redis = new Redis(process.env.REDIS_URL, {
+      maxRetriesPerRequest: 1,
+      connectTimeout: 5000
+    });
+  } catch (err) {
+    console.error("Redis TCP initialization error:", err);
+  }
+}
+
 export default async function handler(request, response) {
   // CORS Headers
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,35 +42,18 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: 'Bad Request: Missing data payload' });
   }
 
-  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-
-  if (!kvUrl || !kvToken) {
+  if (!redis) {
     return response.status(500).json({ 
-      error: 'Vercel KV database is not connected. Please connect a KV database in your Vercel project dashboard.' 
+      error: 'Redis database is not connected. Please verify the REDIS_URL environment variable in your Vercel project.' 
     });
   }
 
   try {
-    // Save updated guest instructions JSON to Vercel KV using REST command API
-    const dbResponse = await fetch(kvUrl, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${kvToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(["SET", "guest_instructions", JSON.stringify(body)])
-    });
-    
-    const result = await dbResponse.json();
-    
-    if (result && result.error) {
-      return response.status(500).json({ error: `Database write failed: ${result.error}` });
-    }
-
+    // Save updated guest instructions JSON to Redis TCP
+    await redis.set("guest_instructions", JSON.stringify(body));
     return response.status(200).json({ message: 'Instructions updated successfully!' });
   } catch (error) {
-    console.error("KV save error:", error);
+    console.error("Redis save error:", error);
     return response.status(500).json({ error: 'Failed to persist updates to the database.' });
   }
 }

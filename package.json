@@ -1,0 +1,9 @@
+{
+  "name": "cadillac-mimo",
+  "version": "1.0.0",
+  "description": "Cadillac MiMo Hotel Platforms",
+  "main": "index.html",
+  "dependencies": {
+    "ioredis": "^5.4.1"
+  }
+}
