@@ -220,17 +220,16 @@ body {
   color: var(--color-primary);
 }
 
-/* Accordion Content Box (CSS Grid Auto Height Interpolation) */
+/* Accordion Content Box (Classic Max-Height Transition) */
 .accordion-content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
   overflow: hidden;
   visibility: hidden; /* Complete hidden visibility when collapsed */
 }
 
 .accordion-item.active .accordion-content {
-  grid-template-rows: 1fr;
+  max-height: 750px; /* Sufficient height to fit any section */
   visibility: visible;
 }
 
@@ -670,4 +669,128 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================================================
+   Review & Social Follow Section
+   ========================================================================== */
+.review-social-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.action-card {
+  background-color: var(--color-card-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: 18px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.review-card {
+  border-color: rgba(88, 171, 158, 0.2);
+  background-color: #fafbfb; /* Subtle teal hint */
+}
+
+.review-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.follow-card {
+  border-color: rgba(244, 226, 222, 0.5);
+  background-color: #fcfbfb; /* Subtle pink hint */
+}
+
+.follow-card:hover {
+  border-color: var(--color-secondary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon-header {
+  font-size: 1.35rem;
+  margin-bottom: 0.1rem;
+}
+
+.card-title-small {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.card-text-small {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  max-width: 320px;
+  margin-bottom: 0.4rem;
+}
+
+.action-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.review-btn {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(88, 171, 158, 0.15);
+}
+
+.review-btn:hover, .review-btn:active {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.follow-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.follow-btn {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.insta-follow:hover, .insta-follow:active {
+  border-color: #e1306c;
+  color: #e1306c;
+  background-color: rgba(225, 48, 108, 0.03);
+  transform: translateY(-1px);
+}
+
+.fb-follow:hover, .fb-follow:active {
+  border-color: #1877f2;
+  color: #1877f2;
+  background-color: rgba(24, 119, 242, 0.03);
+  transform: translateY(-1px);
+}
+
+.follow-icon {
+  width: 14px;
+  height: 14px;
 }
