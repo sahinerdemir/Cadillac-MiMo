@@ -378,3 +378,126 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   Manager Profile Banner & Panel Settings
+   ========================================================================== */
+.manager-settings-banner {
+  background-color: var(--color-secondary);
+  border: 1.5px solid var(--color-secondary-dark);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.banner-icon {
+  font-size: 1.8rem;
+}
+
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.banner-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--color-text-dark);
+}
+
+.banner-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.banner-action-btn {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.banner-action-btn:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Collapsible Manager Panel */
+.manager-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin 0.4s ease;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.manager-panel.active {
+  max-height: 600px;
+  margin-bottom: 1.5rem;
+}
+
+.manager-panel-inner {
+  background-color: var(--color-card-bg);
+  border: 1.5px solid var(--color-primary);
+  border-radius: 18px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+
+.panel-section-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.close-panel-btn {
+  background-color: #fff;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-dark);
+  font-size: 0.9rem;
+}
+
+.close-panel-btn:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(88, 171, 158, 0.03);
+}
+
+.section-help-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}

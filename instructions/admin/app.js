@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkAuth();
   initLoginForm();
   initDirectoryForm();
+  initManagerPanelToggle();
   initLogout();
 });
 
@@ -133,6 +134,8 @@ function populateForm(data) {
 
   // Support Section
   if (data.support) {
+    document.getElementById('supportName').value = data.support.name || 'Nisa';
+    document.getElementById('currentManagerName').textContent = data.support.name || 'Nisa';
     document.getElementById('supportPhone').value = data.support.phone || '';
     document.getElementById('supportWhatsapp').value = data.support.whatsapp || '';
     document.getElementById('supportHours').value = data.support.hours || '';
@@ -148,9 +151,9 @@ function initDirectoryForm() {
   const statusEl = document.getElementById('saveStatus');
   const saveBtn = document.getElementById('saveBtn');
   
-  // Track input changes to trigger local state warning
-  const inputs = form.querySelectorAll('input, textarea');
-  inputs.forEach(input => {
+  // Track input changes across all inputs (including manager panel) to trigger local state warning
+  const allInputs = document.querySelectorAll('input, textarea');
+  allInputs.forEach(input => {
     input.addEventListener('input', () => {
       if (statusEl.className !== 'save-status error') {
         statusEl.textContent = 'Changes are local. Press Save to push online.';
@@ -204,6 +207,7 @@ function initDirectoryForm() {
         security: document.getElementById('rulesSecurity').value.trim()
       },
       support: {
+        name: document.getElementById('supportName').value.trim(),
         phone: document.getElementById('supportPhone').value.trim(),
         whatsapp: document.getElementById('supportWhatsapp').value.trim(),
         hours: document.getElementById('supportHours').value.trim(),
@@ -241,6 +245,12 @@ function initDirectoryForm() {
       }
 
       // Success
+      document.getElementById('currentManagerName').textContent = document.getElementById('supportName').value.trim();
+      const managerPanel = document.getElementById('managerPanel');
+      if (managerPanel) {
+        managerPanel.classList.remove('active');
+        document.getElementById('toggleManagerBtn').textContent = 'Edit Profile';
+      }
       statusEl.textContent = 'All changes pushed online.';
       statusEl.className = 'save-status success';
       showToast('Settings saved successfully!');
@@ -254,6 +264,27 @@ function initDirectoryForm() {
     } finally {
       saveBtn.disabled = false;
     }
+  });
+}
+
+/**
+ * Collapsible Manager Settings Panel Toggle Handler
+ */
+function initManagerPanelToggle() {
+  const toggleBtn = document.getElementById('toggleManagerBtn');
+  const closeBtn = document.getElementById('closeManagerBtn');
+  const panel = document.getElementById('managerPanel');
+  
+  if (!toggleBtn || !panel || !closeBtn) return;
+  
+  toggleBtn.addEventListener('click', () => {
+    panel.classList.toggle('active');
+    toggleBtn.textContent = panel.classList.contains('active') ? 'Close Editor' : 'Edit Profile';
+  });
+  
+  closeBtn.addEventListener('click', () => {
+    panel.classList.remove('active');
+    toggleBtn.textContent = 'Edit Profile';
   });
 }
 

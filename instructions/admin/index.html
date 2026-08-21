@@ -43,6 +43,52 @@
       <button id="logoutBtn" class="logout-btn">Log Out</button>
     </header>
 
+    <!-- Manager Settings Banner -->
+    <div class="manager-settings-banner">
+      <div class="banner-content">
+        <span class="banner-icon">👤</span>
+        <div class="banner-text">
+          <strong class="banner-title">Hospitality Manager: <span id="currentManagerName">Nisa</span></strong>
+          <span class="banner-desc">Update manager name, phone number, and support hours.</span>
+        </div>
+      </div>
+      <button type="button" class="banner-action-btn" id="toggleManagerBtn">Edit Profile</button>
+    </div>
+
+    <!-- Collapsible Manager Form Panel -->
+    <div id="managerPanel" class="manager-panel">
+      <div class="manager-panel-inner">
+        <h3 class="panel-section-title">Manager Profile Settings</h3>
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="supportName">Manager Name</label>
+            <input type="text" id="supportName" required placeholder="e.g. Nisa">
+          </div>
+          <div class="input-group">
+            <label for="supportPhone">Phone Number</label>
+            <input type="text" id="supportPhone" required placeholder="e.g. 786.622.8549">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="supportWhatsapp">WhatsApp Link (Link / Profile)</label>
+          <input type="text" id="supportWhatsapp" required placeholder="e.g. https://wa.me/17866228549">
+        </div>
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="supportHours">Support Hours</label>
+            <input type="text" id="supportHours" required placeholder="e.g. 09:00 AM – 10:00 PM">
+          </div>
+          <div class="input-group">
+            <label for="supportEmergency">Emergency Policy Note</label>
+            <input type="text" id="supportEmergency" required placeholder="e.g. * 10:00 PM – 9:00 AM for emergencies only">
+          </div>
+        </div>
+        <div class="panel-actions">
+          <button type="button" class="submit-btn close-panel-btn" id="closeManagerBtn">Done</button>
+        </div>
+      </div>
+    </div>
+
     <form id="directoryForm" class="dashboard-form">
       
       <!-- Section 1: Entrance Codes & Wi-Fi -->
@@ -165,28 +211,8 @@
 
       <!-- Section 5: Guest Support & Contacts -->
       <fieldset class="form-section">
-        <legend class="section-legend">📞 Guest Support & Manager</legend>
-        
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="supportPhone">Manager Phone (Raw / Display)</label>
-            <input type="text" id="supportPhone" required placeholder="e.g. 786.622.8549">
-          </div>
-          <div class="input-group">
-            <label for="supportWhatsapp">WhatsApp Link (Link / Profile)</label>
-            <input type="text" id="supportWhatsapp" required placeholder="e.g. https://wa.me/17866228549">
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label for="supportHours">Support Hours</label>
-          <input type="text" id="supportHours" required placeholder="e.g. 09:00 AM – 10:00 PM">
-        </div>
-
-        <div class="input-group">
-          <label for="supportEmergency">Emergency Policy Note</label>
-          <input type="text" id="supportEmergency" required placeholder="e.g. * 10:00 PM – 9:00 AM for emergencies only">
-        </div>
+        <legend class="section-legend">📞 Guest Support & Contact Options</legend>
+        <p class="section-help-text">Manager profile parameters (Name, Phone, WhatsApp link, and Support hours) are configured inside the <strong>Hospitality Manager Settings</strong> banner at the top of this page.</p>
       </fieldset>
 
       <!-- Sticky Save Banner -->
