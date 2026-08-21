@@ -102,12 +102,14 @@ body {
 
 /* Welcome letter card */
 .welcome-card {
+/* Welcome letter card */
+.welcome-card {
   width: 100%;
-  background-color: var(--color-secondary);
-  border: 1px dashed rgba(88, 171, 158, 0.3);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,6 +121,7 @@ body {
   line-height: 1.6;
   color: var(--color-text-dark);
   font-weight: 400;
+  text-align: center;
 }
 
 /* Quick contact CTA button */
@@ -128,7 +131,7 @@ body {
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
-  background-color: var(--color-primary);
+  background-color: #f26484; /* Beautiful Miami Pink */
   color: #ffffff;
   text-decoration: none;
   font-family: var(--font-display);
@@ -137,14 +140,14 @@ body {
   letter-spacing: 0.02em;
   padding: 0.9rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(88, 171, 158, 0.2);
+  box-shadow: 0 4px 10px rgba(242, 100, 132, 0.2);
   transition: all 0.2s ease;
 }
 
 .quick-contact-btn:hover, .quick-contact-btn:active {
-  background-color: var(--color-primary-hover);
+  background-color: #df4f70; /* Hover Miami Pink */
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(88, 171, 158, 0.3);
+  box-shadow: 0 6px 14px rgba(242, 100, 132, 0.3);
 }
 
 .btn-icon {
