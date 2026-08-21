@@ -64,7 +64,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.25rem 18rem 1.25rem;
+  padding: 2rem 1.25rem 12rem 1.25rem;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
   position: relative;
 }
