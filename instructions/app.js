@@ -76,6 +76,7 @@ function updateDOM(data) {
   // Support & Contact CTAs
   if (data.support) {
     setText('supportNameDisplay', data.support.name || 'Nisa');
+    setText('heroCallBtnName', data.support.name || 'Nisa');
     setText('supportHoursDisplay', data.support.hours);
     setText('supportEmergencyDisplay', data.support.emergencyNote);
     
