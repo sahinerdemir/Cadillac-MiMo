@@ -902,7 +902,7 @@ body {
    Language Switcher Styles
    ========================================================================== */
 .lang-switch-container {
-  align-self: flex-end;
+  align-self: center;
   display: flex;
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(8px);
@@ -913,7 +913,6 @@ body {
   gap: 2px;
   margin-bottom: 1.25rem;
   z-index: 10;
-  margin-right: -0.25rem;
 }
 
 .lang-btn {
@@ -922,7 +921,7 @@ body {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.75rem;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 1.2rem;
   border-radius: 100px;
   cursor: pointer;
   color: var(--color-text-muted);
