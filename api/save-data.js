@@ -27,8 +27,8 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: 'Bad Request: Missing data payload' });
   }
 
-  const kvUrl = process.env.KV_REST_API_URL;
-  const kvToken = process.env.KV_REST_API_TOKEN;
+  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
 
   if (!kvUrl || !kvToken) {
     return response.status(500).json({ 
