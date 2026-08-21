@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadillac MiMo - Admin Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/instructions/admin/style.css">
+</head>
+<body>
+
+  <!-- Login Container -->
+  <div id="loginScreen" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <h1 class="portal-title">Cadillac MiMo</h1>
+        <p class="portal-subtitle">Hotel Directory Admin Portal</p>
+      </div>
+      <form id="loginForm" class="login-form">
+        <div class="input-group">
+          <label for="adminPassword">Access Password</label>
+          <input type="password" id="adminPassword" placeholder="Enter admin password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="submit-btn login-btn">Sign In</button>
+        <div id="loginError" class="form-error-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Container (Hidden by default) -->
+  <div id="adminDashboard" class="dashboard-wrapper hidden">
+    <header class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Stay Directory Manager</h1>
+        <p class="dashboard-subtitle">Update stay information for rooms & guests</p>
+      </div>
+      <button id="logoutBtn" class="logout-btn">Log Out</button>
+    </header>
+
+    <form id="directoryForm" class="dashboard-form">
+      
+      <!-- Section 1: Entrance Codes & Wi-Fi -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🗝️ Access Codes & Wi-Fi</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="gateCode">Gate Code</label>
+            <input type="text" id="gateCode" required placeholder="e.g. 001207">
+          </div>
+          <div class="input-group">
+            <label for="wifiNetwork">Wi-Fi Network Name</label>
+            <input type="text" id="wifiNetwork" required placeholder="e.g. 5201Guest">
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="wifiPassword">Wi-Fi Password</label>
+          <input type="text" id="wifiPassword" required placeholder="e.g. welcome5201**">
+        </div>
+      </fieldset>
+
+      <!-- Section 2: Property Information -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🏨 Property Info & Guidelines</legend>
+        
+        <div class="input-group">
+          <label for="infoLaundry">Laundry Room Rules</label>
+          <textarea id="infoLaundry" rows="2" required></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="infoTrash">Trash Disposal</label>
+          <textarea id="infoTrash" rows="2" required></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="infoPark">Morningside Park Access</label>
+          <textarea id="infoPark" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoHotWater">Hot Water System Guidelines</label>
+          <textarea id="infoHotWater" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoSmoking">Smoking Policy</label>
+          <textarea id="infoSmoking" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoPackage">Package Deliveries</label>
+          <textarea id="infoPackage" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoParking">Parking Rules</label>
+          <textarea id="infoParking" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 3: Housekeeping Rates -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🧹 Housekeeping & Stays</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="hkStudio">Studio Rate ($)</label>
+            <input type="number" id="hkStudio" required min="0">
+          </div>
+          <div class="input-group">
+            <label for="hkOneBed">One-Bedroom Rate ($)</label>
+            <input type="number" id="hkOneBed" required min="0">
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="hkTwoBed">Two-Bedroom Rate ($)</label>
+            <input type="number" id="hkTwoBed" required min="0">
+          </div>
+          <div class="input-group">
+            <label for="hkExtraTowel">Extra Towel Cost ($)</label>
+            <input type="number" id="hkExtraTowel" required min="0">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="hkLongTerm">Long-Term Stay Policy Description</label>
+          <textarea id="hkLongTerm" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 4: House Rules & Safety -->
+      <fieldset class="form-section">
+        <legend class="section-legend">📜 House Rules & Safety</legend>
+        
+        <div class="input-group">
+          <label for="rulesQuiet">Quiet Hours</label>
+          <input type="text" id="rulesQuiet" required placeholder="e.g. 10:00 PM – 7:00 AM">
+        </div>
+
+        <div class="input-group">
+          <label for="rulesCheckout">Check-out Time</label>
+          <input type="text" id="rulesCheckout" required placeholder="e.g. Before 11:00 AM">
+        </div>
+
+        <div class="input-group">
+          <label for="rulesAc">AC Guidelines</label>
+          <textarea id="rulesAc" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="rulesSecurity">Security & Damage Policy</label>
+          <textarea id="rulesSecurity" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 5: Guest Support & Contacts -->
+      <fieldset class="form-section">
+        <legend class="section-legend">📞 Guest Support & Manager</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="supportPhone">Manager Phone (Raw / Display)</label>
+            <input type="text" id="supportPhone" required placeholder="e.g. 786.622.8549">
+          </div>
+          <div class="input-group">
+            <label for="supportWhatsapp">WhatsApp Link (Link / Profile)</label>
+            <input type="text" id="supportWhatsapp" required placeholder="e.g. https://wa.me/17866228549">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="supportHours">Support Hours</label>
+          <input type="text" id="supportHours" required placeholder="e.g. 09:00 AM – 10:00 PM">
+        </div>
+
+        <div class="input-group">
+          <label for="supportEmergency">Emergency Policy Note</label>
+          <input type="text" id="supportEmergency" required placeholder="e.g. * 10:00 PM – 9:00 AM for emergencies only">
+        </div>
+      </fieldset>
+
+      <!-- Sticky Save Banner -->
+      <div class="save-bar-placeholder"></div>
+      <div class="save-bar">
+        <div class="save-bar-content">
+          <span class="save-status" id="saveStatus">Changes are local. Press Save to push online.</span>
+          <button type="submit" class="submit-btn save-btn" id="saveBtn">Save Stay Information</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript file -->
+  <script src="/instructions/admin/app.js"></script>
+</body>
+</html>

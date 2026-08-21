@@ -1,0 +1,35 @@
+{
+  "codes": {
+    "gateCode": "001207",
+    "wifiNetwork": "5201Guest",
+    "wifiPassword": "welcome5201**"
+  },
+  "info": {
+    "laundry": "Coin-operated washer and dryer ($2.00 per wash / $2.00 per dry). Please avoid using machines after 9:30 PM.",
+    "trash": "Please dispose of all household trash in the large dumpsters located next to the garage entrance.",
+    "park": "Direct access to Morningside Park (walking paths, tennis/basketball courts, playground, waterfront views).",
+    "hotWater": "Central hot water system. During peak evening hours (around 8:00 PM), please allow water to run briefly.",
+    "smoking": "STRICTLY PROHIBITED inside all guest rooms. Allowed ONLY at the designated outdoor wooden bench area. Additional cleaning fees apply for violations.",
+    "package": "On-site package delivery is not accepted. Please route orders to a nearby UPS Store or FedEx Office.",
+    "parking": "Free parking on the street next to the property. The area inside the garage gate is strictly private property."
+  },
+  "housekeeping": {
+    "studioRate": "85",
+    "oneBedRate": "120",
+    "twoBedRate": "160",
+    "extraTowelCost": "7",
+    "longTermPolicy": "For stays exceeding 10 nights, mandatory housekeeping service is required every 10 days."
+  },
+  "rules": {
+    "quietHours": "10:00 PM – 7:00 AM. In respect of neighboring guests, no parties or events are permitted.",
+    "checkoutTime": "Before 11:00 AM.",
+    "acGuidelines": "Keep AC on automatic mode and never set below 70°F to prevent unit freezing and condensation. Please keep all doors and windows closed while running.",
+    "security": "Please keep room doors locked at all times. Guests are responsible for damages or stolen items, the cost of which will be deducted from the deposit."
+  },
+  "support": {
+    "phone": "786.622.8549",
+    "whatsapp": "https://wa.me/17866228549",
+    "hours": "09:00 AM – 10:00 PM",
+    "emergencyNote": "* 10:00 PM – 9:00 AM for emergencies only"
+  }
+}

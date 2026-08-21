@@ -1,12 +1,91 @@
-/* ==========================================================================
-   Cadillac MiMo Hotel Guest Instructions JavaScript
-   Interactivity: Accordions, Clipboard Actions, and Toast Alerts
-   ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
+  fetchDirectoryData(); // Fetch live database values
   initAccordions();
   initCopyToClipboard();
 });
+
+/**
+ * Fetch stay details from database API and dynamically bind to DOM
+ */
+async function fetchDirectoryData() {
+  try {
+    const response = await fetch('/api/get-data');
+    if (!response.ok) throw new Error('Data fetch failed');
+    const data = await response.json();
+    updateDOM(data);
+  } catch (err) {
+    console.warn("Could not load dynamic database stay information, using HTML defaults:", err);
+  }
+}
+
+/**
+ * Overwrite default values with database content dynamically
+ */
+function updateDOM(data) {
+  if (!data) return;
+
+  const setText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val) el.innerHTML = val;
+  };
+  const setAttr = (id, attr, val) => {
+    const el = document.getElementById(id);
+    if (el && val) el.setAttribute(attr, val);
+  };
+
+  // Codes
+  if (data.codes) {
+    setText('gateCodeDisplay', data.codes.gateCode);
+    setAttr('gateCodeCopyBtn', 'data-copy', data.codes.gateCode);
+
+    setText('wifiNetworkDisplay', data.codes.wifiNetwork);
+    setAttr('wifiNetworkCopyBtn', 'data-copy', data.codes.wifiNetwork);
+
+    setText('wifiPasswordDisplay', data.codes.wifiPassword);
+    setAttr('wifiPasswordCopyBtn', 'data-copy', data.codes.wifiPassword);
+  }
+
+  // Info Guidelines
+  if (data.info) {
+    setText('infoLaundryDisplay', data.info.laundry);
+    setText('infoTrashDisplay', data.info.trash);
+    setText('infoParkDisplay', data.info.park);
+    setText('infoHotWaterDisplay', data.info.hotWater);
+    setText('infoSmokingDisplay', data.info.smoking);
+    setText('infoPackageDisplay', data.info.package);
+    setText('infoParkingDisplay', data.info.parking);
+  }
+
+  // Housekeeping
+  if (data.housekeeping) {
+    setText('hkStudioRateDisplay', data.housekeeping.studioRate);
+    setText('hkOneBedRateDisplay', data.housekeeping.oneBedRate);
+    setText('hkTwoBedRateDisplay', data.housekeeping.twoBedRate);
+    setText('hkExtraTowelDisplay', data.housekeeping.extraTowelCost);
+    setText('hkLongTermDisplay', data.housekeeping.longTermPolicy);
+  }
+
+  // Rules
+  if (data.rules) {
+    setText('rulesQuietDisplay', data.rules.quietHours);
+    setText('rulesCheckoutDisplay', data.rules.checkoutTime);
+    setText('rulesAcDisplay', data.rules.acGuidelines);
+    setText('rulesSecurityDisplay', data.rules.security);
+  }
+
+  // Support & Contact CTAs
+  if (data.support) {
+    setText('supportNameDisplay', data.support.name || 'Nisa');
+    setText('supportHoursDisplay', data.support.hours);
+    setText('supportEmergencyDisplay', data.support.emergencyNote);
+    
+    // Sanitize phone for tel: tags
+    const cleanPhone = data.support.phone ? data.support.phone.replace(/\D/g, '') : '7866228549';
+    setAttr('supportPhoneBtn', 'href', `tel:${cleanPhone}`);
+    setAttr('heroCallBtn', 'href', `tel:${cleanPhone}`);
+    setAttr('supportWhatsappBtn', 'href', data.support.whatsapp);
+  }
+}
 
 /**
  * 1. Independent Accordion Menu System

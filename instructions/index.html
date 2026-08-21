@@ -71,7 +71,7 @@
         <p class="welcome-text">
           Welcome! Thank you for staying with us. We're delighted to host you and hope you have a comfortable and memorable stay. Please review our guide below.
         </p>
-        <a href="tel:7866228549" class="quick-contact-btn" id="callNisaHero">
+        <a href="tel:7866228549" class="quick-contact-btn" id="heroCallBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           <span>Contact Manager (Nisa)</span>
         </a>
@@ -96,8 +96,8 @@
                 <span class="badge-status">Active</span>
               </div>
               <div class="code-row">
-                <span class="code-value font-mono select-all">001207</span>
-                <button class="copy-btn" data-copy="001207" aria-label="Copy entrance code">
+                <span class="code-value font-mono select-all" id="gateCodeDisplay">001207</span>
+                <button class="copy-btn" id="gateCodeCopyBtn" data-copy="001207" aria-label="Copy entrance code">
                   <span class="btn-text">Copy Code</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
@@ -110,8 +110,8 @@
                 <span class="badge-status">Free Guest Wi-Fi</span>
               </div>
               <div class="code-row">
-                <span class="code-value select-all">5201Guest</span>
-                <button class="copy-btn" data-copy="5201Guest" aria-label="Copy Wi-Fi network name">
+                <span class="code-value select-all" id="wifiNetworkDisplay">5201Guest</span>
+                <button class="copy-btn" id="wifiNetworkCopyBtn" data-copy="5201Guest" aria-label="Copy Wi-Fi network name">
                   <span class="btn-text">Copy</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
@@ -121,8 +121,8 @@
                 <span class="code-title">Wi-Fi Password</span>
               </div>
               <div class="code-row">
-                <span class="code-value font-mono select-all">welcome5201**</span>
-                <button class="copy-btn" data-copy="welcome5201**" aria-label="Copy Wi-Fi password">
+                <span class="code-value font-mono select-all" id="wifiPasswordDisplay">welcome5201**</span>
+                <button class="copy-btn" id="wifiPasswordCopyBtn" data-copy="welcome5201**" aria-label="Copy Wi-Fi password">
                   <span class="btn-text">Copy</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </button>
@@ -145,43 +145,43 @@
               <li>
                 <span class="info-icon">🧺</span>
                 <div class="info-text">
-                  <strong>Laundry Room:</strong> Coin-operated washer and dryer ($2.00 per wash / $2.00 per dry). <em class="text-attention">Please avoid using machines after 9:30 PM.</em>
+                  <strong>Laundry Room:</strong> <span id="infoLaundryDisplay">Coin-operated washer and dryer ($2.00 per wash / $2.00 per dry). <em class="text-attention">Please avoid using machines after 9:30 PM.</em></span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🗑️</span>
                 <div class="info-text">
-                  <strong>Trash Disposal:</strong> Please dispose of all household trash in the large dumpsters located next to the garage entrance.
+                  <strong>Trash Disposal:</strong> <span id="infoTrashDisplay">Please dispose of all household trash in the large dumpsters located next to the garage entrance.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🌳</span>
                 <div class="info-text">
-                  <strong>Morningside Park Access:</strong> Direct access to Morningside Park (walking paths, tennis/basketball courts, playground, waterfront views).
+                  <strong>Morningside Park Access:</strong> <span id="infoParkDisplay">Direct access to Morningside Park (walking paths, tennis/basketball courts, playground, waterfront views).</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🚿</span>
                 <div class="info-text">
-                  <strong>Hot Water System:</strong> Central hot water system. During peak evening hours (around 8:00 PM), please allow water to run briefly.
+                  <strong>Hot Water System:</strong> <span id="infoHotWaterDisplay">Central hot water system. During peak evening hours (around 8:00 PM), please allow water to run briefly.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🚭</span>
                 <div class="info-text">
-                  <strong>Smoking Policy:</strong> <span class="badge-notice pink">STRICTLY PROHIBITED</span> inside all guest rooms. Allowed ONLY at the designated outdoor wooden bench area. Additional cleaning fees apply for violations.
+                  <strong>Smoking Policy:</strong> <span id="infoSmokingDisplay"><span class="badge-notice pink">STRICTLY PROHIBITED</span> inside all guest rooms. Allowed ONLY at the designated outdoor wooden bench area. Additional cleaning fees apply for violations.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">📦</span>
                 <div class="info-text">
-                  <strong>Package Deliveries:</strong> On-site package delivery is not accepted. Please route orders to a nearby UPS Store or FedEx Office.
+                  <strong>Package Deliveries:</strong> <span id="infoPackageDisplay">On-site package delivery is not accepted. Please route orders to a nearby UPS Store or FedEx Office.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🚗</span>
                 <div class="info-text">
-                  <strong>Parking / Free Parking:</strong> Free parking on the street next to the property. The area inside the garage gate is strictly private property.
+                  <strong>Parking / Free Parking:</strong> <span id="infoParkingDisplay">Free parking on the street next to the property. The area inside the garage gate is strictly private property.</span>
                 </div>
               </li>
             </ul>
@@ -205,15 +205,15 @@
               <span class="card-subtitle">On-Demand Housekeeping Rates</span>
               <div class="price-row">
                 <span>Studio Apartment</span>
-                <span class="price-val">$85</span>
+                <span class="price-val">$<span id="hkStudioRateDisplay">85</span></span>
               </div>
               <div class="price-row">
                 <span>One-Bedroom Apartment</span>
-                <span class="price-val">$120</span>
+                <span class="price-val">$<span id="hkOneBedRateDisplay">120</span></span>
               </div>
               <div class="price-row">
                 <span>Two-Bedroom Apartment</span>
-                <span class="price-val">$160</span>
+                <span class="price-val">$<span id="hkTwoBedRateDisplay">160</span></span>
               </div>
             </div>
 
@@ -221,13 +221,13 @@
               <li>
                 <span class="info-icon">🧻</span>
                 <div class="info-text">
-                  <strong>Extra Towels:</strong> Available upon request at <strong class="color-teal">$7 per towel</strong>.
+                  <strong>Extra Towels:</strong> Available upon request at <strong class="color-teal">$<span id="hkExtraTowelDisplay">7</span> per towel</strong>.
                 </div>
               </li>
               <li>
                 <span class="info-icon">📅</span>
                 <div class="info-text">
-                  <strong>Long-Term Stay Policy:</strong> For stays exceeding 10 nights, mandatory housekeeping service is required every 10 days.
+                  <strong>Long-Term Stay Policy:</strong> <span id="hkLongTermDisplay">For stays exceeding 10 nights, mandatory housekeeping service is required every 10 days.</span>
                 </div>
               </li>
             </ul>
@@ -247,25 +247,25 @@
               <li>
                 <span class="info-icon">🤫</span>
                 <div class="info-text">
-                  <strong>Quiet Hours:</strong> 10:00 PM – 7:00 AM. In respect of neighboring guests, no parties or events are permitted.
+                  <strong>Quiet Hours:</strong> <span id="rulesQuietDisplay">10:00 PM – 7:00 AM. In respect of neighboring guests, no parties or events are permitted.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🕚</span>
                 <div class="info-text">
-                  <strong>Check-out Time:</strong> Before 11:00 AM.
+                  <strong>Check-out Time:</strong> <span id="rulesCheckoutDisplay">Before 11:00 AM.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">❄️</span>
                 <div class="info-text">
-                  <strong>Air Conditioning Guidelines:</strong> Keep AC on automatic mode and <strong class="color-pink">never set below 70°F</strong> to prevent unit freezing and condensation. Please keep all doors and windows closed while running.
+                  <strong>Air Conditioning Guidelines:</strong> <span id="rulesAcDisplay">Keep AC on automatic mode and <strong class="color-pink">never set below 70°F</strong> to prevent unit freezing and condensation. Please keep all doors and windows closed while running.</span>
                 </div>
               </li>
               <li>
                 <span class="info-icon">🔒</span>
                 <div class="info-text">
-                  <strong>Security & Damage Policy:</strong> Please keep room doors locked at all times. Guests are responsible for damages or stolen items, the cost of which will be deducted from the deposit.
+                  <strong>Security & Damage Policy:</strong> <span id="rulesSecurityDisplay">Please keep room doors locked at all times. Guests are responsible for damages or stolen items, the cost of which will be deducted from the deposit.</span>
                 </div>
               </li>
             </ul>
@@ -284,22 +284,22 @@
             
             <div class="support-card">
               <span class="support-label">Hospitality Manager</span>
-              <h3 class="support-name">Nisa</h3>
+              <h3 class="support-name" id="supportNameDisplay">Nisa</h3>
               
               <div class="support-hours">
                 <span class="hours-badge">Support Hours</span>
-                <p>09:00 AM – 10:00 PM</p>
-                <p class="emergency-note"><em>* 10:00 PM – 9:00 AM for emergencies only</em></p>
+                <p id="supportHoursDisplay">09:00 AM – 10:00 PM</p>
+                <p class="emergency-note" id="supportEmergencyDisplay"><em>* 10:00 PM – 9:00 AM for emergencies only</em></p>
               </div>
 
               <!-- Direct Call and WhatsApp buttons -->
               <div class="button-grid">
-                <a href="tel:7866228549" class="cta-btn phone-btn">
+                <a href="tel:7866228549" class="cta-btn phone-btn" id="supportPhoneBtn">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                   <span>Call Now</span>
                 </a>
                 
-                <a href="https://wa.me/17866228549" target="_blank" rel="noopener noreferrer" class="cta-btn whatsapp-btn">
+                <a href="https://wa.me/17866228549" target="_blank" rel="noopener noreferrer" class="cta-btn whatsapp-btn" id="supportWhatsappBtn">
                   <svg viewBox="0 0 24 24" fill="currentColor" class="btn-svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.73-1.45L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.59 1.978 14.122.951 11.487.95c-5.43 0-9.855 4.37-9.859 9.802-.001 1.716.467 3.39 1.355 4.877l-.994 3.635 3.724-.962c1.468.802 3.11 1.258 4.834 1.258zM18.803 15.6c-.313-.156-1.853-.907-2.142-1.012-.289-.106-.499-.156-.71.156-.21.312-.818 1.012-1.001 1.218-.184.206-.368.23-.68.074-.313-.156-1.32-.482-2.515-1.54-1.285-1.136-1.902-1.483-2.184-1.794-.282-.313-.03-.482.126-.637.14-.139.313-.367.469-.55.156-.185.21-.312.313-.52.106-.207.053-.39-.026-.547-.08-.156-.71-1.7-.972-2.325-.256-.615-.513-.53-.71-.54-.185-.01-.397-.01-.607-.01-.21 0-.552.08-.84.394-.289.313-1.098 1.066-1.098 2.602 0 1.537 1.129 3.024 1.287 3.232.158.207 2.222 3.367 5.383 4.717.752.32 1.34.51 1.8.653.755.238 1.442.205 1.986.124.606-.09 1.853-.75 2.115-1.44.263-.69.263-1.284.184-1.408-.08-.124-.289-.206-.603-.362z"></path></svg>
                   <span>WhatsApp</span>
                 </a>
