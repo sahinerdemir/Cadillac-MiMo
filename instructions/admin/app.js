@@ -102,6 +102,16 @@ function populateForm(data) {
     document.getElementById('gateCode').value = data.codes.gateCode || '';
     document.getElementById('wifiNetwork').value = data.codes.wifiNetwork || '';
     document.getElementById('wifiPassword').value = data.codes.wifiPassword || '';
+    
+    // Additional Wi-Fi
+    document.getElementById('wifiNetwork1').value = data.codes.wifiNetwork1 || 'WI-TEK_75a4';
+    document.getElementById('wifiPassword1').value = data.codes.wifiPassword1 || '88888888';
+    document.getElementById('wifiNetwork2').value = data.codes.wifiNetwork2 || 'WI-TEK_1f46';
+    document.getElementById('wifiPassword2').value = data.codes.wifiPassword2 || '88888888';
+    document.getElementById('wifiNetwork3').value = data.codes.wifiNetwork3 || 'WI-TEK_322C';
+    document.getElementById('wifiPassword3').value = data.codes.wifiPassword3 || '88888888';
+    document.getElementById('wifiNetwork4').value = data.codes.wifiNetwork4 || 'WI-TEK_7274';
+    document.getElementById('wifiPassword4').value = data.codes.wifiPassword4 || '88888888';
   }
 
   // Info Guidelines Section
@@ -182,7 +192,17 @@ function initDirectoryForm() {
       codes: {
         gateCode: document.getElementById('gateCode').value.trim(),
         wifiNetwork: document.getElementById('wifiNetwork').value.trim(),
-        wifiPassword: document.getElementById('wifiPassword').value.trim()
+        wifiPassword: document.getElementById('wifiPassword').value.trim(),
+        
+        // Additional Wi-Fi
+        wifiNetwork1: document.getElementById('wifiNetwork1').value.trim(),
+        wifiPassword1: document.getElementById('wifiPassword1').value.trim(),
+        wifiNetwork2: document.getElementById('wifiNetwork2').value.trim(),
+        wifiPassword2: document.getElementById('wifiPassword2').value.trim(),
+        wifiNetwork3: document.getElementById('wifiNetwork3').value.trim(),
+        wifiPassword3: document.getElementById('wifiPassword3').value.trim(),
+        wifiNetwork4: document.getElementById('wifiNetwork4').value.trim(),
+        wifiPassword4: document.getElementById('wifiPassword4').value.trim()
       },
       info: {
         laundry: document.getElementById('infoLaundry').value.trim(),

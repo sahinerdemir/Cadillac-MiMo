@@ -2,7 +2,15 @@
   "codes": {
     "gateCode": "001207",
     "wifiNetwork": "5201Guest",
-    "wifiPassword": "welcome5201**"
+    "wifiPassword": "welcome5201**",
+    "wifiNetwork1": "WI-TEK_75a4",
+    "wifiPassword1": "88888888",
+    "wifiNetwork2": "WI-TEK_1f46",
+    "wifiPassword2": "88888888",
+    "wifiNetwork3": "WI-TEK_322C",
+    "wifiPassword3": "88888888",
+    "wifiNetwork4": "WI-TEK_7274",
+    "wifiPassword4": "88888888"
   },
   "info": {
     "laundry": "Coin-operated washer and dryer ($2.00 per wash / $2.00 per dry). Please avoid using machines after 9:30 PM.",

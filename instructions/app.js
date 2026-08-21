@@ -307,6 +307,31 @@ function renderPage() {
 
     setText('wifiPasswordDisplay', stayData.codes.wifiPassword);
     setAttr('wifiPasswordCopyBtn', 'data-copy', stayData.codes.wifiPassword);
+
+    // Additional Networks
+    const wifi1 = stayData.codes.wifiNetwork1 || 'WI-TEK_75a4';
+    const pw1 = stayData.codes.wifiPassword1 || '88888888';
+    setText('wifiNetwork1Display', wifi1);
+    setText('wifiPassword1Display', pw1);
+    setAttr('wifiPassword1CopyBtn', 'data-copy', pw1);
+
+    const wifi2 = stayData.codes.wifiNetwork2 || 'WI-TEK_1f46';
+    const pw2 = stayData.codes.wifiPassword2 || '88888888';
+    setText('wifiNetwork2Display', wifi2);
+    setText('wifiPassword2Display', pw2);
+    setAttr('wifiPassword2CopyBtn', 'data-copy', pw2);
+
+    const wifi3 = stayData.codes.wifiNetwork3 || 'WI-TEK_322C';
+    const pw3 = stayData.codes.wifiPassword3 || '88888888';
+    setText('wifiNetwork3Display', wifi3);
+    setText('wifiPassword3Display', pw3);
+    setAttr('wifiPassword3CopyBtn', 'data-copy', pw3);
+
+    const wifi4 = stayData.codes.wifiNetwork4 || 'WI-TEK_7274';
+    const pw4 = stayData.codes.wifiPassword4 || '88888888';
+    setText('wifiNetwork4Display', wifi4);
+    setText('wifiPassword4Display', pw4);
+    setAttr('wifiPassword4CopyBtn', 'data-copy', pw4);
   }
 
   // Info Guidelines
