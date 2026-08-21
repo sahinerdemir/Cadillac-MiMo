@@ -26,11 +26,11 @@ We replaced the hardcoded guest information with a dynamic data delivery loop:
    - Serverless endpoint to save updates. Enforces password authentication using standard HTTP Bearer headers against an `ADMIN_PASSWORD` environment variable (defaults to `cadillac5201` if unset) and writes updates to Vercel KV.
 4. **[NEW] Admin Portal Frontend Dashboard**:
    - **[instructions/admin/index.html](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/admin/index.html)**: Provides a password entry screen and grouped forms to update stay codes, housekeeping rates, safety rules, manager hours, and property guidelines.
-   - **[instructions/admin/style.css](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/admin/style.css)**: Modern, clean styling with clear focus glows, grouped forms, grid layouts, and a glassmorphic sticky bottom save bar.
+   - **[instructions/admin/style.css](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/admin/style.css)**: Modern, clean styling with clear focus glows, grouped forms, grid layouts, and a glassmorphic sticky bottom save bar. Includes the custom styling for the top sliding manager profile tray.
    - **[instructions/admin/app.js](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/admin/app.js)**: Session management (auth persistent in sessionStorage), loads stay details on dashboard initialization, validates form values, and posts payload updates to `/api/save-data`.
 5. **[MODIFY] Guest App Integration**:
-   - **[instructions/index.html](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/index.html)**: Placed target IDs (`id="gateCodeDisplay"`, `id="wifiNetworkDisplay"`, `id="hkStudioRateDisplay"`, etc.) onto copy containers, text fields, and CTAs.
-   - **[instructions/app.js](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/app.js)**: Dynamically fetches stay details from `/api/get-data` on page load. If successful, dynamically injects values into the page (overwriting default values) and updates copy buttons' clipboard metadata.
+   - **[instructions/index.html](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/index.html)**: Placed target IDs (`id="gateCodeDisplay"`, `id="wifiNetworkDisplay"`, `id="hkStudioRateDisplay"`, and the new welcome contact manager hook `id="heroCallBtnName"`) onto copy containers, text fields, and CTAs. Both top and bottom sections use the unified label **"Hospitality Manager"**.
+   - **[instructions/app.js](file:///Users/sahinerdemir/Cadillac%20MiMo/instructions/app.js)**: Dynamically fetches stay details from `/api/get-data` on page load. If successful, dynamically injects values into the page (overwriting default values) and updates copy buttons' clipboard metadata and welcome button names.
 
 ---
 
