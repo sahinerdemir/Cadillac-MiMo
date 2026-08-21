@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const TRANSLATIONS = {
   en: {
     welcomeText: "Welcome! Thank you for staying with us. We're delighted to host you and hope you have a comfortable and memorable stay. Please review our guide below.",
-    contactManager: "Contact Hospitality Manager",
+    contactManager: "Contact Manager",
     
     // Accordion triggers
     titleCodes: "Entrance Codes & Wi-Fi",
@@ -90,7 +90,7 @@ const TRANSLATIONS = {
   },
   es: {
     welcomeText: "¡Bienvenido! Gracias por hospedarse con nosotros. Nos complace recibirle y esperamos que tenga una estadía cómoda y memorable. Por favor revise nuestra guía a continuación.",
-    contactManager: "Contactar al Gerente de Hospitalidad",
+    contactManager: "Contactar al Gerente",
     
     // Accordion triggers
     titleCodes: "Códigos de acceso y Wi-Fi",
