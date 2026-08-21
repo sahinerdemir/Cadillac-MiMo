@@ -941,15 +941,9 @@ body {
 /* ==========================================================================
    Additional Wi-Fi List Styles
    ========================================================================== */
-.wifi-divider {
-  height: 1px;
-  background-color: var(--color-border);
-  margin: 1.5rem 0;
-  width: 100%;
-}
-
 .additional-wifi-header {
-  margin-bottom: 0.75rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .additional-wifi-list {
