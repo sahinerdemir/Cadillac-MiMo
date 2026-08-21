@@ -75,9 +75,10 @@ body {
   margin-bottom: 2rem;
   text-align: center;
   background-image: url('banner.jpg');
-  background-size: 100% 100%;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: top center;
   background-repeat: no-repeat;
+  background-color: #fdfaf6; /* soft cream background to blend seamlessly */
   border-radius: 20px;
   padding: 1.25rem 1.25rem 2.25rem 1.25rem;
   border: 1px solid rgba(222, 192, 142, 0.25);
