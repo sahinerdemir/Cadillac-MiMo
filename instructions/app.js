@@ -38,6 +38,8 @@ const TRANSLATIONS = {
     badgeFreeWifi: "Free Guest Wi-Fi",
     btnCopy: "Copy",
     cardTitleWifiPw: "Wi-Fi Password",
+    cardTitleAdditionalWifi: "Additional Property Networks",
+    btnCopyPw: "Copy PW",
 
     // Property Info section labels
     labelLaundry: "Laundry Room:",
@@ -108,6 +110,8 @@ const TRANSLATIONS = {
     badgeFreeWifi: "Wi-Fi gratis para huéspedes",
     btnCopy: "Copiar",
     cardTitleWifiPw: "Contraseña de Wi-Fi",
+    cardTitleAdditionalWifi: "Redes adicionales de la propiedad",
+    btnCopyPw: "Copiar PW",
 
     // Property Info section labels
     labelLaundry: "Lavandería:",
@@ -383,6 +387,8 @@ function initCopyToClipboard() {
       
       if (!textToCopy) return;
 
+      const originalKey = textSpan ? (textSpan.getAttribute('data-i18n') || 'btnCopy') : 'btnCopy';
+
       try {
         await navigator.clipboard.writeText(textToCopy);
         
@@ -394,10 +400,7 @@ function initCopyToClipboard() {
         setTimeout(() => {
           btn.classList.remove('copied');
           if (textSpan) {
-            const isGate = btn.id === 'gateCodeCopyBtn';
-            textSpan.innerHTML = isGate 
-              ? TRANSLATIONS[currentLang].btnCopyGate 
-              : TRANSLATIONS[currentLang].btnCopy;
+            textSpan.innerHTML = TRANSLATIONS[currentLang][originalKey] || TRANSLATIONS[currentLang].btnCopy;
           }
         }, 2000);
       } catch (err) {

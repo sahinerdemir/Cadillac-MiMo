@@ -938,3 +938,65 @@ body {
 .lang-btn:hover:not(.active) {
   color: var(--color-text-dark);
 }
+
+/* ==========================================================================
+   Additional Wi-Fi List Styles
+   ========================================================================== */
+.wifi-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.additional-wifi-header {
+  margin-bottom: 0.75rem;
+}
+
+.additional-wifi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.wifi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(30, 41, 59, 0.02);
+  border: 1px solid rgba(30, 41, 59, 0.05);
+  border-radius: 10px;
+  gap: 1rem;
+}
+
+.wifi-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wifi-item-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.wifi-item-pw {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.wifi-item-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mini-copy {
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.68rem !important;
+  border-radius: 6px !important;
+  height: auto !important;
+}
