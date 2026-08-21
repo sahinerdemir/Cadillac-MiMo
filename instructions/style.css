@@ -63,6 +63,23 @@ body {
   padding: 2rem 1.25rem 3rem 1.25rem;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
   position: relative;
+  z-index: 1; /* Creates a stacking context for background pseudo-element placement */
+}
+
+/* Faint vector silhouette palm trees for premium Miami vibe */
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2358ab9e' opacity='0.035'%3E%3Cpath d='M40 800 Q70 500 80 250 C83 250 86 250 85 255 Q75 500 45 800 Z' /%3E%3Cpath d='M80 250 Q50 255 20 220 C40 210 65 220 80 250 Z' /%3E%3Cpath d='M80 250 Q60 210 40 160 C60 170 70 200 80 250 Z' /%3E%3Cpath d='M80 250 Q85 190 90 120 C95 190 90 220 80 250 Z' /%3E%3Cpath d='M80 250 Q110 210 130 160 C110 170 100 200 80 250 Z' /%3E%3Cpath d='M80 250 Q120 255 150 220 C130 210 105 220 80 250 Z' /%3E%3Cpath d='M80 250 Q110 290 130 330 C110 300 100 280 80 250 Z' /%3E%3Cpath d='M80 250 Q60 290 40 330 C60 300 70 280 80 250 Z' /%3E%3Cpath d='M360 800 Q310 550 280 380 C283 378 286 378 287 382 Q317 550 365 800 Z' /%3E%3Cpath d='M280 380 Q250 385 220 350 C240 340 265 350 280 380 Z' /%3E%3Cpath d='M280 380 Q260 340 240 290 C260 300 270 330 280 380 Z' /%3E%3Cpath d='M280 380 Q285 320 290 250 C295 320 290 350 280 380 Z' /%3E%3Cpath d='M280 380 Q310 340 330 290 C310 300 300 330 280 380 Z' /%3E%3Cpath d='M280 380 Q320 385 350 350 C330 340 305 350 280 380 Z' /%3E%3Cpath d='M280 380 Q310 420 330 460 C310 430 300 410 280 380 Z' /%3E%3Cpath d='M280 380 Q260 420 240 460 C260 430 270 410 280 380 Z' /%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -1; /* Placed directly behind the main directory list */
 }
 
 /* ==========================================================================
