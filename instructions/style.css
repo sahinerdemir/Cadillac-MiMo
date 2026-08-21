@@ -57,6 +57,10 @@ body {
   width: 100%;
   max-width: var(--app-max-width);
   background-color: var(--color-bg);
+  background-image: url('banner.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -74,17 +78,7 @@ body {
   align-items: center;
   margin-bottom: 2rem;
   text-align: center;
-  background-image: url('banner.jpg');
-  background-size: 100% auto;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-color: #fdfaf6; /* soft cream background to blend seamlessly */
-  border-radius: 20px;
-  padding: 1.25rem 1.25rem 2.25rem 1.25rem;
-  border: 1px solid rgba(222, 192, 142, 0.25);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
-  position: relative;
-  overflow: hidden;
+  width: 100%;
 }
 
 /* Branding Logo rendering */
