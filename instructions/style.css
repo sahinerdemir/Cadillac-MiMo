@@ -230,7 +230,7 @@ body {
 }
 
 .accordion-item.active .accordion-content {
-  max-height: 1000px; /* Sufficient height to fit any section including local guide */
+  max-height: 1500px; /* Large enough limit to prevent clipping of maps and recommendations */
   visibility: visible;
 }
 
@@ -875,7 +875,8 @@ body {
   border-radius: 14px;
   overflow: hidden;
   border: 1.5px solid var(--color-border);
-  margin-bottom: 1.25rem;
+  margin-top: 1.75rem; /* Detaches the map from the recommendation cards above */
+  margin-bottom: 1.5rem; /* Detaches the map from the button below */
   box-shadow: var(--shadow-sm);
 }
 
