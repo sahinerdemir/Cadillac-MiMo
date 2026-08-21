@@ -131,7 +131,7 @@ body {
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
-  background-color: #f26484; /* Beautiful Miami Pink */
+  background-color: var(--color-primary); /* Signature Teal */
   color: #ffffff;
   text-decoration: none;
   font-family: var(--font-display);
@@ -140,14 +140,14 @@ body {
   letter-spacing: 0.02em;
   padding: 0.9rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(242, 100, 132, 0.2);
+  box-shadow: 0 4px 10px rgba(88, 171, 158, 0.2);
   transition: all 0.2s ease;
 }
 
 .quick-contact-btn:hover, .quick-contact-btn:active {
-  background-color: #df4f70; /* Hover Miami Pink */
+  background-color: var(--color-primary-hover); /* Hover Teal */
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(242, 100, 132, 0.3);
+  box-shadow: 0 6px 14px rgba(88, 171, 158, 0.3);
 }
 
 .btn-icon {
