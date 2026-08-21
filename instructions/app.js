@@ -40,6 +40,7 @@ const TRANSLATIONS = {
     cardTitleWifiPw: "Wi-Fi Password",
     cardTitleAdditionalWifi: "Additional Property Networks",
     btnCopyPw: "Copy PW",
+    btnCopied: "Copied!",
 
     // Property Info section labels
     labelLaundry: "Laundry Room:",
@@ -112,6 +113,7 @@ const TRANSLATIONS = {
     cardTitleWifiPw: "Contraseña de Wi-Fi",
     cardTitleAdditionalWifi: "Redes adicionales de la propiedad",
     btnCopyPw: "Copiar PW",
+    btnCopied: "¡Copiado!",
 
     // Property Info section labels
     labelLaundry: "Lavandería:",
