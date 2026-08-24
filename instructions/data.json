@@ -40,5 +40,10 @@
     "whatsapp": "https://wa.me/19548126528",
     "hours": "09:00 AM – 10:00 PM",
     "emergencyNote": "* 10:00 PM – 9:00 AM for emergencies only"
+  },
+  "social": {
+    "googleReview": "https://search.google.com/local/writereview?placeid=ChIJY-W5zOGz2YgRqqyvj_rwIEo",
+    "instagram": "https://instagram.com/cadillacmimo",
+    "facebook": "https://facebook.com/cadillacmimo"
   }
 }

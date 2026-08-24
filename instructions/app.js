@@ -382,6 +382,13 @@ function renderPage() {
     const extendEl = document.getElementById('supportExtendDesc');
     if (extendEl) extendEl.textContent = extendText;
   }
+
+  // Social & Review Links
+  if (stayData.social) {
+    setAttr('googleReviewLink', 'href', stayData.social.googleReview);
+    setAttr('instagramLink', 'href', stayData.social.instagram);
+    setAttr('facebookLink', 'href', stayData.social.facebook);
+  }
 }
 
 /**

@@ -151,6 +151,13 @@ function populateForm(data) {
     document.getElementById('supportHours').value = data.support.hours || '';
     document.getElementById('supportEmergency').value = data.support.emergencyNote || '';
   }
+
+  // Social Section
+  if (data.social) {
+    document.getElementById('socialGoogleReview').value = data.social.googleReview || '';
+    document.getElementById('socialInstagram').value = data.social.instagram || '';
+    document.getElementById('socialFacebook').value = data.social.facebook || '';
+  }
 }
 
 /**
@@ -232,6 +239,11 @@ function initDirectoryForm() {
         whatsapp: document.getElementById('supportWhatsapp').value.trim(),
         hours: document.getElementById('supportHours').value.trim(),
         emergencyNote: document.getElementById('supportEmergency').value.trim()
+      },
+      social: {
+        googleReview: document.getElementById('socialGoogleReview').value.trim(),
+        instagram: document.getElementById('socialInstagram').value.trim(),
+        facebook: document.getElementById('socialFacebook').value.trim()
       }
     };
 
