@@ -144,8 +144,8 @@ function populateForm(data) {
 
   // Support Section
   if (data.support) {
-    document.getElementById('supportName').value = data.support.name || 'Nisa';
-    document.getElementById('currentManagerName').textContent = data.support.name || 'Nisa';
+    document.getElementById('supportName').value = data.support.name || 'Sweda';
+    document.getElementById('currentManagerName').textContent = data.support.name || 'Sweda';
     document.getElementById('supportPhone').value = data.support.phone || '';
     document.getElementById('supportWhatsapp').value = data.support.whatsapp || '';
     document.getElementById('supportHours').value = data.support.hours || '';

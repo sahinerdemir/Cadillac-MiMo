@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const TRANSLATIONS = {
   en: {
     welcomeText: "Welcome! Thank you for staying with us. We're delighted to host you and hope you have a comfortable and memorable stay. Please review our guide below.",
-    contactManager: "Contact Manager",
+    contactManager: "WhatsApp",
     
     // Accordion triggers
     titleCodes: "Entrance Codes & Wi-Fi",
@@ -93,7 +93,7 @@ const TRANSLATIONS = {
   },
   es: {
     welcomeText: "¡Bienvenido! Gracias por hospedarse con nosotros. Nos complace recibirle y esperamos que tenga una estadía cómoda y memorable. Por favor revise nuestra guía a continuación.",
-    contactManager: "Contactar al Gerente",
+    contactManager: "WhatsApp",
     
     // Accordion triggers
     titleCodes: "Códigos de acceso y Wi-Fi",
@@ -364,21 +364,21 @@ function renderPage() {
 
   // Support & Contact CTAs
   if (stayData.support) {
-    setText('supportNameDisplay', stayData.support.name || 'Nisa');
-    setText('heroCallBtnName', stayData.support.name || 'Nisa');
+    setText('supportNameDisplay', stayData.support.name || 'Sweda');
+    setText('heroCallBtnName', stayData.support.name || 'Sweda');
     setText('supportHoursDisplay', stayData.support.hours);
     setText('supportEmergencyDisplay', stayData.support.emergencyNote, true);
     
     // Sanitize phone for tel: tags
-    const cleanPhone = stayData.support.phone ? stayData.support.phone.replace(/\D/g, '') : '7866228549';
+    const cleanPhone = stayData.support.phone ? stayData.support.phone.replace(/\D/g, '') : '9548126528';
     setAttr('supportPhoneBtn', 'href', `tel:${cleanPhone}`);
-    setAttr('heroCallBtn', 'href', `tel:${cleanPhone}`);
-    setAttr('supportWhatsappBtn', 'href', stayData.support.whatsapp);
+    setAttr('heroCallBtn', 'href', stayData.support.whatsapp || 'https://wa.me/19548126528');
+    setAttr('supportWhatsappBtn', 'href', stayData.support.whatsapp || 'https://wa.me/19548126528');
 
     // Update dynamic stay extension message
     const extendText = currentLang === 'en'
-      ? `Contact ${stayData.support.name || 'Nisa'} directly to check availability for extending your stay or requesting a late check-out.`
-      : `Contacte a ${stayData.support.name || 'Nisa'} directamente para consultar la disponibilidad para extender su estadía o solicitar un check-out tardío.`;
+      ? `Contact ${stayData.support.name || 'Sweda'} directly to check availability for extending your stay or requesting a late check-out.`
+      : `Contacte a ${stayData.support.name || 'Sweda'} directamente para consultar la disponibilidad para extender su estadía o solicitar un check-out tardío.`;
     const extendEl = document.getElementById('supportExtendDesc');
     if (extendEl) extendEl.textContent = extendText;
   }
