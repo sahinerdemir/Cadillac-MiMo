@@ -12,6 +12,30 @@
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/instructions/admin/style.css">
+  <style>
+    .translate-btn {
+      background: none;
+      border: none;
+      color: #10b981; /* Emerald/Green theme color */
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+    .translate-btn:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .translate-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
 
@@ -101,7 +125,10 @@
             <input type="text" id="titleCodesEn" required placeholder="e.g. Entrance Codes & Wi-Fi">
           </div>
           <div class="input-group">
-            <label for="titleCodesEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleCodesEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleCodesEn', 'titleCodesEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titleCodesEs" required placeholder="e.g. Códigos de acceso y Wi-Fi">
           </div>
         </div>
@@ -180,7 +207,10 @@
             <input type="text" id="titlePropertyEn" required placeholder="e.g. Property Information">
           </div>
           <div class="input-group">
-            <label for="titlePropertyEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titlePropertyEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titlePropertyEn', 'titlePropertyEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titlePropertyEs" required placeholder="e.g. Información de la propiedad">
           </div>
         </div>
@@ -231,7 +261,10 @@
             <input type="text" id="titleHkEn" required placeholder="e.g. Housekeeping & Stays">
           </div>
           <div class="input-group">
-            <label for="titleHkEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleHkEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleHkEn', 'titleHkEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titleHkEs" required placeholder="e.g. Limpieza y estadías">
           </div>
         </div>
@@ -274,7 +307,10 @@
             <input type="text" id="titleRulesEn" required placeholder="e.g. House Rules & Safety">
           </div>
           <div class="input-group">
-            <label for="titleRulesEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleRulesEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleRulesEn', 'titleRulesEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titleRulesEs" required placeholder="e.g. Reglas de la casa y seguridad">
           </div>
         </div>
@@ -310,7 +346,10 @@
             <input type="text" id="titleSupportEn" required placeholder="e.g. Guest Support & Help">
           </div>
           <div class="input-group">
-            <label for="titleSupportEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleSupportEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleSupportEn', 'titleSupportEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titleSupportEs" required placeholder="e.g. Soporte para huéspedes y ayuda">
           </div>
         </div>
@@ -328,7 +367,10 @@
             <input type="text" id="titleGuideEn" required placeholder="e.g. Local Guide & Explore">
           </div>
           <div class="input-group">
-            <label for="titleGuideEs">Section Title (Spanish)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleGuideEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleGuideEn', 'titleGuideEs')">⚡ Auto-Translate</button>
+            </div>
             <input type="text" id="titleGuideEs" required placeholder="e.g. Guía local y exploración">
           </div>
         </div>

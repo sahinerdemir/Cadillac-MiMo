@@ -385,3 +385,54 @@ function showToast(message, isError = false) {
     setTimeout(() => toast.remove(), 300);
   }, 2500);
 }
+
+/**
+ * 7. English to Spanish Auto-Translation Utility
+ */
+async function translateField(sourceId, targetId) {
+  const sourceEl = document.getElementById(sourceId);
+  const targetEl = document.getElementById(targetId);
+  if (!sourceEl || !targetEl) return;
+
+  const text = sourceEl.value.trim();
+  if (!text) {
+    showToast('Please enter an English title first.', true);
+    return;
+  }
+
+  const btn = event?.currentTarget || document.activeElement;
+  let originalText = '';
+  if (btn && btn.classList.contains('translate-btn')) {
+    originalText = btn.innerHTML;
+    btn.innerHTML = '⌛ Translating...';
+    btn.disabled = true;
+  }
+
+  try {
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|es`);
+    if (!res.ok) throw new Error('Translation API failed');
+    
+    const data = await res.json();
+    if (data.responseData && data.responseData.translatedText) {
+      targetEl.value = data.responseData.translatedText;
+      // Dispatch input event to notify any validation listeners of the change
+      targetEl.dispatchEvent(new Event('input', { bubbles: true }));
+      // Notify save bar of local unsaved change
+      const saveStatus = document.getElementById('saveStatus');
+      if (saveStatus) {
+        saveStatus.textContent = 'Changes are local. Press Save to push online.';
+      }
+      showToast('Translated successfully!');
+    } else {
+      throw new Error('No translated text returned');
+    }
+  } catch (err) {
+    console.error("Translation error:", err);
+    showToast('Translation service failed. Please fill manually.', true);
+  } finally {
+    if (btn && btn.classList.contains('translate-btn')) {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
+  }
+}
