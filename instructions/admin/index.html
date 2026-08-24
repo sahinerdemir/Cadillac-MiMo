@@ -95,6 +95,17 @@
       <fieldset class="form-section">
         <legend class="section-legend">🗝️ Access Codes & Wi-Fi</legend>
         
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleCodesEn">Section Title (English)</label>
+            <input type="text" id="titleCodesEn" required placeholder="e.g. Entrance Codes & Wi-Fi">
+          </div>
+          <div class="input-group">
+            <label for="titleCodesEs">Section Title (Spanish)</label>
+            <input type="text" id="titleCodesEs" required placeholder="e.g. Códigos de acceso y Wi-Fi">
+          </div>
+        </div>
+        
         <div class="grid-2-col">
           <div class="input-group">
             <label for="gateCode">Gate Code</label>
@@ -163,6 +174,17 @@
       <fieldset class="form-section">
         <legend class="section-legend">🏨 Property Info & Guidelines</legend>
         
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titlePropertyEn">Section Title (English)</label>
+            <input type="text" id="titlePropertyEn" required placeholder="e.g. Property Information">
+          </div>
+          <div class="input-group">
+            <label for="titlePropertyEs">Section Title (Spanish)</label>
+            <input type="text" id="titlePropertyEs" required placeholder="e.g. Información de la propiedad">
+          </div>
+        </div>
+        
         <div class="input-group">
           <label for="infoLaundry">Laundry Room Rules</label>
           <textarea id="infoLaundry" rows="2" required></textarea>
@@ -203,6 +225,17 @@
       <fieldset class="form-section">
         <legend class="section-legend">🧹 Housekeeping & Stays</legend>
         
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleHkEn">Section Title (English)</label>
+            <input type="text" id="titleHkEn" required placeholder="e.g. Housekeeping & Stays">
+          </div>
+          <div class="input-group">
+            <label for="titleHkEs">Section Title (Spanish)</label>
+            <input type="text" id="titleHkEs" required placeholder="e.g. Limpieza y estadías">
+          </div>
+        </div>
+        
         <div class="grid-2-col">
           <div class="input-group">
             <label for="hkStudio">Studio Rate ($)</label>
@@ -235,6 +268,17 @@
       <fieldset class="form-section">
         <legend class="section-legend">📜 House Rules & Safety</legend>
         
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleRulesEn">Section Title (English)</label>
+            <input type="text" id="titleRulesEn" required placeholder="e.g. House Rules & Safety">
+          </div>
+          <div class="input-group">
+            <label for="titleRulesEs">Section Title (Spanish)</label>
+            <input type="text" id="titleRulesEs" required placeholder="e.g. Reglas de la casa y seguridad">
+          </div>
+        </div>
+        
         <div class="input-group">
           <label for="rulesQuiet">Quiet Hours</label>
           <input type="text" id="rulesQuiet" required placeholder="e.g. 10:00 PM – 7:00 AM">
@@ -259,7 +303,35 @@
       <!-- Section 5: Guest Support & Contacts -->
       <fieldset class="form-section">
         <legend class="section-legend">📞 Guest Support & Contact Options</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleSupportEn">Section Title (English)</label>
+            <input type="text" id="titleSupportEn" required placeholder="e.g. Guest Support & Help">
+          </div>
+          <div class="input-group">
+            <label for="titleSupportEs">Section Title (Spanish)</label>
+            <input type="text" id="titleSupportEs" required placeholder="e.g. Soporte para huéspedes y ayuda">
+          </div>
+        </div>
+        
         <p class="section-help-text">Manager profile parameters (Name, Phone, WhatsApp link, and Support hours) are configured inside the <strong>Hospitality Manager Settings</strong> banner at the top of this page.</p>
+      </fieldset>
+
+      <!-- Section 6: Local Guide Section Title -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🗺️ Local Guide Section Title</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="titleGuideEn">Section Title (English)</label>
+            <input type="text" id="titleGuideEn" required placeholder="e.g. Local Guide & Explore">
+          </div>
+          <div class="input-group">
+            <label for="titleGuideEs">Section Title (Spanish)</label>
+            <input type="text" id="titleGuideEs" required placeholder="e.g. Guía local y exploración">
+          </div>
+        </div>
       </fieldset>
 
       <!-- Section 6: Social Media & Google Review Links -->
@@ -279,96 +351,6 @@
           <div class="input-group">
             <label for="socialFacebook">Facebook Link</label>
             <input type="url" id="socialFacebook" required placeholder="e.g. https://facebook.com/cadillacmimo">
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- Section 7: Portal Section Titles -->
-      <fieldset class="form-section">
-        <legend class="section-legend">✏️ Portal Section Titles</legend>
-        <p class="section-help-text">Customize the headers for each accordion block in the guest portal (in English and Spanish).</p>
-
-        <!-- Access Codes Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">1. Entrance Codes & Wi-Fi Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titleCodesEn">English Title</label>
-            <input type="text" id="titleCodesEn" required placeholder="e.g. Entrance Codes & Wi-Fi">
-          </div>
-          <div class="input-group">
-            <label for="titleCodesEs">Spanish Title</label>
-            <input type="text" id="titleCodesEs" required placeholder="e.g. Códigos de acceso y Wi-Fi">
-          </div>
-        </div>
-
-        <!-- Property Info Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">2. Property Info Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titlePropertyEn">English Title</label>
-            <input type="text" id="titlePropertyEn" required placeholder="e.g. Property Information">
-          </div>
-          <div class="input-group">
-            <label for="titlePropertyEs">Spanish Title</label>
-            <input type="text" id="titlePropertyEs" required placeholder="e.g. Información de la propiedad">
-          </div>
-        </div>
-
-        <!-- Housekeeping Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">3. Housekeeping & Stays Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titleHkEn">English Title</label>
-            <input type="text" id="titleHkEn" required placeholder="e.g. Housekeeping & Stays">
-          </div>
-          <div class="input-group">
-            <label for="titleHkEs">Spanish Title</label>
-            <input type="text" id="titleHkEs" required placeholder="e.g. Limpieza y estadías">
-          </div>
-        </div>
-
-        <!-- House Rules Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">4. House Rules & Safety Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titleRulesEn">English Title</label>
-            <input type="text" id="titleRulesEn" required placeholder="e.g. House Rules & Safety">
-          </div>
-          <div class="input-group">
-            <label for="titleRulesEs">Spanish Title</label>
-            <input type="text" id="titleRulesEs" required placeholder="e.g. Reglas de la casa y seguridad">
-          </div>
-        </div>
-
-        <!-- Local Guide Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">5. Local Guide & Explore Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titleGuideEn">English Title</label>
-            <input type="text" id="titleGuideEn" required placeholder="e.g. Local Guide & Explore">
-          </div>
-          <div class="input-group">
-            <label for="titleGuideEs">Spanish Title</label>
-            <input type="text" id="titleGuideEs" required placeholder="e.g. Guía local y exploración">
-          </div>
-        </div>
-
-        <!-- Guest Support Trigger Title -->
-        <div class="divider" style="margin: 1rem 0; height: 1px; background-color: var(--color-border);"></div>
-        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">6. Guest Support & Help Title</h4>
-        <div class="grid-2-col">
-          <div class="input-group">
-            <label for="titleSupportEn">English Title</label>
-            <input type="text" id="titleSupportEn" required placeholder="e.g. Guest Support & Help">
-          </div>
-          <div class="input-group">
-            <label for="titleSupportEs">Spanish Title</label>
-            <input type="text" id="titleSupportEs" required placeholder="e.g. Soporte para huéspedes y ayuda">
           </div>
         </div>
       </fieldset>
