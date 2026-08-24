@@ -158,6 +158,22 @@ function populateForm(data) {
     document.getElementById('socialInstagram').value = data.social.instagram || '';
     document.getElementById('socialFacebook').value = data.social.facebook || '';
   }
+
+  // Titles Section
+  if (data.titles) {
+    document.getElementById('titleCodesEn').value = data.titles.codesEn || '';
+    document.getElementById('titleCodesEs').value = data.titles.codesEs || '';
+    document.getElementById('titlePropertyEn').value = data.titles.propertyEn || '';
+    document.getElementById('titlePropertyEs').value = data.titles.propertyEs || '';
+    document.getElementById('titleHkEn').value = data.titles.hkEn || '';
+    document.getElementById('titleHkEs').value = data.titles.hkEs || '';
+    document.getElementById('titleRulesEn').value = data.titles.rulesEn || '';
+    document.getElementById('titleRulesEs').value = data.titles.rulesEs || '';
+    document.getElementById('titleGuideEn').value = data.titles.guideEn || '';
+    document.getElementById('titleGuideEs').value = data.titles.guideEs || '';
+    document.getElementById('titleSupportEn').value = data.titles.supportEn || '';
+    document.getElementById('titleSupportEs').value = data.titles.supportEs || '';
+  }
 }
 
 /**
@@ -244,6 +260,20 @@ function initDirectoryForm() {
         googleReview: document.getElementById('socialGoogleReview').value.trim(),
         instagram: document.getElementById('socialInstagram').value.trim(),
         facebook: document.getElementById('socialFacebook').value.trim()
+      },
+      titles: {
+        codesEn: document.getElementById('titleCodesEn').value.trim(),
+        codesEs: document.getElementById('titleCodesEs').value.trim(),
+        propertyEn: document.getElementById('titlePropertyEn').value.trim(),
+        propertyEs: document.getElementById('titlePropertyEs').value.trim(),
+        hkEn: document.getElementById('titleHkEn').value.trim(),
+        hkEs: document.getElementById('titleHkEs').value.trim(),
+        rulesEn: document.getElementById('titleRulesEn').value.trim(),
+        rulesEs: document.getElementById('titleRulesEs').value.trim(),
+        guideEn: document.getElementById('titleGuideEn').value.trim(),
+        guideEs: document.getElementById('titleGuideEs').value.trim(),
+        supportEn: document.getElementById('titleSupportEn').value.trim(),
+        supportEs: document.getElementById('titleSupportEs').value.trim()
       }
     };
 

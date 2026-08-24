@@ -271,6 +271,22 @@ async function fetchDirectoryData() {
  * Render all static and dynamic elements based on language & loaded database values
  */
 function renderPage() {
+  // Apply dynamic accordion titles from the database if they exist
+  if (stayData && stayData.titles) {
+    if (stayData.titles.codesEn) TRANSLATIONS.en.titleCodes = stayData.titles.codesEn;
+    if (stayData.titles.codesEs) TRANSLATIONS.es.titleCodes = stayData.titles.codesEs;
+    if (stayData.titles.propertyEn) TRANSLATIONS.en.titleProperty = stayData.titles.propertyEn;
+    if (stayData.titles.propertyEs) TRANSLATIONS.es.titleProperty = stayData.titles.propertyEs;
+    if (stayData.titles.hkEn) TRANSLATIONS.en.titleHk = stayData.titles.hkEn;
+    if (stayData.titles.hkEs) TRANSLATIONS.es.titleHk = stayData.titles.hkEs;
+    if (stayData.titles.rulesEn) TRANSLATIONS.en.titleRules = stayData.titles.rulesEn;
+    if (stayData.titles.rulesEs) TRANSLATIONS.es.titleRules = stayData.titles.rulesEs;
+    if (stayData.titles.guideEn) TRANSLATIONS.en.titleGuide = stayData.titles.guideEn;
+    if (stayData.titles.guideEs) TRANSLATIONS.es.titleGuide = stayData.titles.guideEs;
+    if (stayData.titles.supportEn) TRANSLATIONS.en.titleSupport = stayData.titles.supportEn;
+    if (stayData.titles.supportEs) TRANSLATIONS.es.titleSupport = stayData.titles.supportEs;
+  }
+
   // 1. Translate all static label text placeholders marked with data-i18n
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');

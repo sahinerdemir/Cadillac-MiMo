@@ -45,5 +45,19 @@
     "googleReview": "https://search.google.com/local/writereview?placeid=ChIJY-W5zOGz2YgRqqyvj_rwIEo",
     "instagram": "https://instagram.com/cadillacmimo",
     "facebook": "https://facebook.com/cadillacmimo"
+  },
+  "titles": {
+    "codesEn": "Entrance Codes & Wi-Fi",
+    "codesEs": "Códigos de acceso y Wi-Fi",
+    "propertyEn": "Property Information",
+    "propertyEs": "Información de la propiedad",
+    "hkEn": "Housekeeping & Stays",
+    "hkEs": "Limpieza y estadías",
+    "rulesEn": "House Rules & Safety",
+    "rulesEs": "Reglas de la casa y seguridad",
+    "guideEn": "Local Guide & Explore",
+    "guideEs": "Guía local y exploración",
+    "supportEn": "Guest Support & Help",
+    "supportEs": "Soporte para huéspedes y ayuda"
   }
 }
