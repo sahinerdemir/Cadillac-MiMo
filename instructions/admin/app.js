@@ -154,7 +154,6 @@ function populateForm(data) {
 
   // Social Section
   if (data.social) {
-    document.getElementById('socialGoogleReview').value = data.social.googleReview || '';
     document.getElementById('socialInstagram').value = data.social.instagram || '';
     document.getElementById('socialFacebook').value = data.social.facebook || '';
   }
@@ -257,7 +256,6 @@ function initDirectoryForm() {
         emergencyNote: document.getElementById('supportEmergency').value.trim()
       },
       social: {
-        googleReview: document.getElementById('socialGoogleReview').value.trim(),
         instagram: document.getElementById('socialInstagram').value.trim(),
         facebook: document.getElementById('socialFacebook').value.trim()
       },
