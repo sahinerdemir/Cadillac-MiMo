@@ -1,364 +1,995 @@
 /* ==========================================================================
-   Cadillac MiMo Hotel Coming Soon Page CSS
-   Theme: Miami Modern Retro-Luxury (Premium Light Mode)
+   Cadillac MiMo Hotel Guest Instructions Stylesheet
+   Theme: 1950s Miami Modern Nostalgia with Crisp Hospitality Layout
    ========================================================================== */
 
-/* Design Tokens & Variables */
+/* CSS Design Tokens & Variables */
 :root {
-  --bg-light: #f7f9fc;
-  --bg-gradient: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f3f8 100%);
-  
-  /* MiMo Palette for Light Mode */
-  --accent-teal: #00a4b4;
-  --accent-pink: #e03274;
-  --accent-gold: #cfa856;
+  /* Brand Palette */
+  --color-primary: #58ab9e;        /* Sage / Teal Accent */
+  --color-primary-hover: #489387;
+  --color-secondary: #f4e2de;      /* Miami Soft Pink Light */
+  --color-secondary-dark: #fad6d6; /* Miami Soft Pink Solid */
+  --color-bg: #faf8f5;             /* Warm Cream Background */
+  --color-card-bg: #ffffff;        /* Pure White Card Background */
+  --color-text-dark: #1e293b;      /* Deep Charcoal for high contrast readability */
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
   
   /* Typography */
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(88, 171, 158, 0.08);
+  --shadow-lg: 0 10px 25px rgba(30, 41, 59, 0.08);
+  
+  /* Layout constraints */
+  --app-max-width: 480px;
 }
 
-/* Reset & Base Styles */
+/* Base resets & iOS optimizations */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Disable tap highlight box on iOS */
 }
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  background-color: #f1ede6; /* Darker warm backdrop for large screens */
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
   height: 100%;
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--bg-light);
-  background: var(--bg-gradient);
-  color: #111625;
-  overflow-x: hidden;
+  background-color: var(--color-bg);
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* App Wrapper constraints (optimizing for mobile 375px-430px) */
+.app-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  background-color: var(--color-bg);
+  background-image: url('banner.jpg'), url('footer.jpg');
+  background-repeat: no-repeat, no-repeat;
+  background-position: top center, bottom center;
+  background-size: 100% auto, 100% auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 2rem 1.25rem 12rem 1.25rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
   position: relative;
 }
 
-/* Background Google Map Styling (Light Mode) */
-.map-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.52; /* Highly visible light map */
-}
-
-.map-container iframe {
-  position: absolute;
-  top: 0;
-  left: -50vw; /* Shift map center (the pin) to 25vw (left side) */
-  width: 150vw; /* Make wider to fully cover screen width (150vw - 50vw = 100vw) */
-  height: 100%;
-  border: 0;
-  /* Make the map black and white, bright and silver-toned */
-  filter: grayscale(100%) contrast(1.12) brightness(1.05);
-}
-
-.map-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Light soft vignetting overlay to draw eyes to the center logo */
-  background: radial-gradient(circle at center, transparent 50%, var(--bg-light) 95%);
-  z-index: 2;
-}
-
-/* Page Layout Wrapper */
-.page-wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  z-index: 10;
+/* ==========================================================================
+   Header / Hero Section
+   ========================================================================== */
+.hero-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2.5rem 1.5rem;
-}
-
-/* Subtle background glowing orb */
-.glow-backdrop {
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 164, 180, 0.05) 0%, rgba(224, 50, 116, 0.02) 50%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* Central Content Container */
-.content-container {
+  margin-bottom: 2rem;
+  text-align: center;
   width: 100%;
-  max-width: 620px;
-  min-height: calc(100vh - 5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
-/* Logo Styling and Pulsing Backlight */
-.logo-wrapper {
-  position: relative;
+/* Branding Logo rendering */
+.logo-container {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 320px;
-  height: 140px;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .hotel-logo {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  /* Original black SVG paths match light background. Apply clean soft shadow */
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
-  z-index: 5;
+  height: auto;
 }
 
-/* Elegant Dialog Popup styling */
-.coming-soon-dialog {
-  border: none;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 
-    0 24px 60px rgba(17, 22, 37, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  max-width: 420px;
-  width: calc(100% - 2.5rem);
-  padding: 3rem 2.5rem;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  text-align: center;
-  color: #111625;
-  outline: none;
-  z-index: 100;
-  
-  /* Entry/Exit animations with starting-style */
-  opacity: 0;
-  transform: translate(-50%, -46%) scale(0.95);
-  transition: opacity 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), display 0.35s allow-discrete;
+.logo-paths {
+  fill: var(--color-text-dark);
 }
 
-.coming-soon-dialog[open] {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+.logo-divider {
+  fill: var(--color-primary);
 }
 
-@starting-style {
-  .coming-soon-dialog[open] {
-    opacity: 0;
-    transform: translate(-50%, -46%) scale(0.95);
-  }
-}
-
-.coming-soon-dialog::backdrop {
-  background: rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(0px);
-  opacity: 0;
-  transition: opacity 0.35s ease, backdrop-filter 0.35s ease, display 0.35s allow-discrete;
-}
-
-.coming-soon-dialog[open]::backdrop {
-  opacity: 1;
-  backdrop-filter: blur(6px);
-}
-
-@starting-style {
-  .coming-soon-dialog[open]::backdrop {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-}
-
-.close-btn {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
+/* Welcome letter card */
+.welcome-card {
+  width: 100%;
   background: transparent;
   border: none;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: rgba(17, 22, 37, 0.4);
-  cursor: pointer;
-  line-height: 1;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-}
-
-.close-btn:hover {
-  color: #111625;
-  background: rgba(17, 22, 37, 0.05);
-}
-
-.dialog-badge {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--accent-pink);
-  margin-bottom: 0.85rem;
-}
-
-.coming-soon-dialog h2 {
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  margin-bottom: 1rem;
-  color: #111625;
-}
-
-.coming-soon-dialog p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(17, 22, 37, 0.75);
-}
-
-/* Footer Section */
-.footer-info {
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.social-links {
-  display: flex;
   gap: 1.25rem;
 }
 
-.social-icon {
-  color: rgba(17, 22, 37, 0.45);
-  transition: all 0.3s ease;
-  display: flex;
+.welcome-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Quick contact CTA button */
+.quick-contact-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(17, 22, 37, 0.03);
-  border: 1px solid rgba(17, 22, 37, 0.08);
-}
-
-.social-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-.social-icon:hover {
-  color: #111625;
-  background: rgba(17, 22, 37, 0.08);
-  transform: translateY(-2px);
-}
-
-.social-icon#socialInsta:hover {
-  border-color: var(--accent-pink);
-  box-shadow: 0 0 12px rgba(224, 50, 116, 0.15);
-  color: var(--accent-pink);
-}
-
-.social-icon#socialFb:hover {
-  border-color: #1877f2;
-  box-shadow: 0 0 12px rgba(24, 119, 242, 0.15);
-  color: #1877f2;
-}
-
-.social-icon#socialMap:hover {
-  border-color: var(--accent-teal);
-  box-shadow: 0 0 12px rgba(0, 164, 180, 0.15);
-  color: var(--accent-teal);
-}
-
-.address {
-  font-size: 0.78rem;
-  color: rgba(17, 22, 37, 0.5);
-  letter-spacing: 0.05em;
-  text-align: center;
+  gap: 0.6rem;
+  width: 100%;
+  background-color: var(--color-primary); /* Signature Teal */
+  color: #ffffff;
+  text-decoration: none;
   font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(88, 171, 158, 0.2);
+  transition: all 0.2s ease;
+}
+
+.quick-contact-btn:hover, .quick-contact-btn:active {
+  background-color: var(--color-primary-hover); /* Hover Teal */
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(88, 171, 158, 0.3);
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* ==========================================================================
-   Media Queries & Responsiveness
+   Accordion Menu System
+   ========================================================================== */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Reduced gap for a more compact and neat layout */
+  flex-grow: 1;
+}
+
+.accordion-item {
+  background-color: var(--color-card-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active accordion styling */
+.accordion-item.active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* Trigger Button */
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.trigger-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.emoji {
+  font-size: 1.15rem;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Rotate Chevron when active */
+.accordion-item.active .chevron {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+/* Accordion Content Box (Classic Max-Height Transition) */
+.accordion-content {
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+  overflow: hidden;
+  visibility: hidden; /* Complete hidden visibility when collapsed */
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 1500px; /* Large enough limit to prevent clipping of maps and recommendations */
+  visibility: visible;
+}
+
+.content-inner {
+  min-height: 0;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  border-top: 1px solid transparent; /* Hide border when closed to prevent faint lines */
+  transition: border-color 0.35s ease;
+}
+
+.accordion-item.active .content-inner {
+  border-top-color: var(--color-border);
+}
+
+/* ==========================================================================
+   Inner Content Elements
    ========================================================================== */
 
-@media (max-width: 600px) {
-  /* Lock viewport and prevent scrolling on mobile devices */
-  html, body {
-    height: 100dvh;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
+/* Access / Code Cards */
+.code-card {
+  background-color: #FAF9F6;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.1rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
 
-  html {
-    font-size: 14px;
-  }
-  
-  .page-wrapper {
-    padding: 1.5rem 1rem;
-    height: 100dvh;
-    min-height: 100dvh;
-    overflow: hidden;
-  }
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .content-container {
-    height: 100%;
-    min-height: 100%;
-  }
-  
-  .logo-wrapper {
-    max-width: 240px;
-    height: 100px;
-  }
-  
-  /* Position map pin on mobile vertically between logo (centered) and top edge */
-  .map-container iframe {
-    left: 0;
-    width: 100vw;
-    top: -55dvh;
-    height: 155dvh;
-  }
+.code-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
 
-  /* Fade out bottom of the map on mobile to make footer icons highly visible */
-  .map-overlay {
-    background: 
-      linear-gradient(to bottom, transparent 30%, var(--bg-light) 90%),
-      radial-gradient(circle at center, transparent 40%, var(--bg-light) 95%);
+.badge-status {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  background-color: rgba(88, 171, 158, 0.08);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+
+.code-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.code-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.font-mono {
+  font-family: 'Space Grotesk', monospace;
+  letter-spacing: 0.03em;
+}
+
+.select-all {
+  user-select: all;
+  -webkit-user-select: all;
+}
+
+/* Copy Action Button */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.copy-btn:hover, .copy-btn:active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.copy-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Wifi Spacers */
+.wifi-card {
+  gap: 0.8rem;
+}
+
+.wifi-pw-header {
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Info Lists (Icons + Descriptions) */
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1rem;
+}
+
+.info-list.gap-small {
+  gap: 0.8rem;
+}
+
+.info-list li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.info-icon {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.info-text strong {
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.text-attention {
+  color: var(--color-primary-hover);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.badge-notice {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.badge-notice.pink {
+  color: #c93b58;
+  background-color: #ffeef0;
+}
+
+.color-teal {
+  color: var(--color-primary);
+}
+
+.color-pink {
+  color: #c93b58;
+}
+
+/* Housekeeping Price Card */
+.intro-block {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.price-table-card {
+  background-color: #FAF9F6;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.92rem;
+}
+
+.price-row span:first-child {
+  font-weight: 500;
+}
+
+.price-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+}
+
+/* Support Card */
+.support-card {
+  background-color: #FAF9F6;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.support-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.support-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-dark);
+}
+
+.support-hours {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.hours-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  background-color: rgba(30, 41, 59, 0.05);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.2rem;
+}
+
+.support-hours p {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.emergency-note {
+  font-size: 0.75rem;
+  color: #c93b58;
+}
+
+/* Direct support buttons */
+.button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.phone-btn {
+  background-color: var(--color-primary);
+}
+
+.phone-btn:hover, .phone-btn:active {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.whatsapp-btn {
+  background-color: #25D366;
+}
+
+.whatsapp-btn:hover, .whatsapp-btn:active {
+  background-color: #20BA56;
+  transform: translateY(-1px);
+}
+
+.btn-svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Notice Card */
+.notice-card {
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-secondary-dark);
+  border-radius: 14px;
+  padding: 1.1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.notice-card strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.card-desc {
+  color: var(--color-text-dark);
+  opacity: 0.85;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ==========================================================================
+   Footer Section
+   ========================================================================== */
+.app-footer {
+  margin-top: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.app-footer .address {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+.app-footer .credits {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Toast Notification System
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  width: calc(100% - 2.5rem);
+  max-width: 320px;
+}
+
+.toast {
+  background-color: var(--color-text-dark);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 100px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  /* Slide-up animations */
+  animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: opacity 0.3s ease;
+}
+
+.toast-hide {
+  opacity: 0;
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Review & Social Follow Section
+   ========================================================================== */
+.review-social-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.action-card {
+  background-color: var(--color-card-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: 18px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.review-card {
+  border-color: rgba(88, 171, 158, 0.2);
+  background-color: #fafbfb; /* Subtle teal hint */
+}
+
+.review-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.follow-card {
+  border-color: rgba(244, 226, 222, 0.5);
+  background-color: #fcfbfb; /* Subtle pink hint */
+}
+
+.follow-card:hover {
+  border-color: var(--color-secondary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon-header {
+  font-size: 1.35rem;
+  margin-bottom: 0.1rem;
+}
+
+.card-title-small {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.card-text-small {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  max-width: 320px;
+  margin-bottom: 0.4rem;
+}
+
+.action-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.review-btn {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(88, 171, 158, 0.15);
+}
+
+.review-btn:hover, .review-btn:active {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.follow-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.follow-btn {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.insta-follow:hover, .insta-follow:active {
+  border-color: #e1306c;
+  color: #e1306c;
+  background-color: rgba(225, 48, 108, 0.03);
+  transform: translateY(-1px);
+}
+
+.fb-follow:hover, .fb-follow:active {
+  border-color: #1877f2;
+  color: #1877f2;
+  background-color: rgba(24, 119, 242, 0.03);
+  transform: translateY(-1px);
+}
+
+.follow-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   Local Guide & Nearby Places Styles
+   ========================================================================== */
+.places-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.place-recommendation-card {
+  background-color: #faf9f6;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.place-tag {
+  align-self: flex-start;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.place-tag.food {
+  color: #c27d38;
+  background-color: #fdf5eb;
+}
+
+.place-tag.nature {
+  color: #2b7a78;
+  background-color: #e6f2f2;
+}
+
+.place-tag.arts {
+  color: #8b5cf6;
+  background-color: #f5f3ff;
+}
+
+.place-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.place-description {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.place-map-link {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+}
+
+.place-map-link:hover {
+  color: var(--color-primary-hover);
+}
+
+.guide-map-wrapper {
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-border);
+  margin-top: 1.75rem; /* Detaches the map from the recommendation cards above */
+  margin-bottom: 1.5rem; /* Detaches the map from the button below */
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.local-explore-btn {
+  background-color: var(--color-primary);
+  box-shadow: 0 4px 10px rgba(88, 171, 158, 0.15);
+}
+
+/* ==========================================================================
+   Language Switcher Styles
+   ========================================================================== */
+.lang-switch-container {
+  align-self: center;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  padding: 2px;
+  gap: 2px;
+  margin-bottom: 1.25rem;
+  z-index: 10;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lang-btn.active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.lang-btn:hover:not(.active) {
+  color: var(--color-text-dark);
+}
+
+/* ==========================================================================
+   Additional Wi-Fi List Styles
+   ========================================================================== */
+.additional-wifi-header {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.additional-wifi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.wifi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(30, 41, 59, 0.02);
+  border: 1px solid rgba(30, 41, 59, 0.05);
+  border-radius: 10px;
+  gap: 1rem;
+}
+
+.wifi-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wifi-item-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.wifi-item-pw {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.wifi-item-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.mini-copy {
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.68rem !important;
+  border-radius: 6px !important;
+  height: auto !important;
 }
