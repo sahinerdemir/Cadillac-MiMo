@@ -1,18 +1,5 @@
 import Redis from 'ioredis';
 
-// Instantiate Redis TCP client globally for Vercel Serverless container reuse
-let redis;
-if (process.env.REDIS_URL) {
-  try {
-    redis = new Redis(process.env.REDIS_URL, {
-      maxRetriesPerRequest: 1,
-      connectTimeout: 5000
-    });
-  } catch (err) {
-    console.error("Redis TCP initialization error:", err);
-  }
-}
-
 export default async function handler(request, response) {
   // CORS Headers
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -44,18 +31,64 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: 'Bad Request: Missing data payload' });
   }
 
-  if (!redis) {
-    return response.status(500).json({ 
-      error: 'Redis database is not connected. Please verify the REDIS_URL environment variable in your Vercel project.' 
+  const payloadString = JSON.stringify(body);
+  const errors = [];
+
+  // 1. Attempt Save via Upstash / Vercel KV REST API if configured
+  const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (kvUrl && kvToken) {
+    try {
+      const restRes = await fetch(kvUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${kvToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(["SET", "guest_instructions", payloadString])
+      });
+      const restData = await restRes.json();
+      if (restData && restData.error) {
+        throw new Error(`REST Error: ${restData.error}`);
+      }
+      return response.status(200).json({ message: 'Instructions updated successfully via REST!' });
+    } catch (err) {
+      console.error("KV REST save error:", err);
+      errors.push(`REST: ${err.message}`);
+    }
+  }
+
+  // 2. Attempt Save via Redis TCP (REDIS_URL) if configured
+  if (process.env.REDIS_URL) {
+    let client;
+    try {
+      client = new Redis(process.env.REDIS_URL, {
+        maxRetriesPerRequest: 1,
+        connectTimeout: 5000,
+        enableReadyCheck: false
+      });
+
+      await client.set("guest_instructions", payloadString);
+      return response.status(200).json({ message: 'Instructions updated successfully via Redis TCP!' });
+    } catch (err) {
+      console.error("Redis TCP save error:", err);
+      errors.push(`TCP: ${err.message}`);
+    } finally {
+      if (client) {
+        try { client.disconnect(); } catch (_) {}
+      }
+    }
+  }
+
+  // 3. If neither worked or neither is configured
+  if (!kvUrl && !process.env.REDIS_URL) {
+    return response.status(500).json({
+      error: 'No database configured. Please add REDIS_URL or KV_REST_API_URL to your Vercel Environment Variables.'
     });
   }
 
-  try {
-    // Save updated guest instructions JSON to Redis TCP
-    await redis.set("guest_instructions", JSON.stringify(body));
-    return response.status(200).json({ message: 'Instructions updated successfully!' });
-  } catch (error) {
-    console.error("Redis save error:", error);
-    return response.status(500).json({ error: 'Failed to persist updates to the database.' });
-  }
+  return response.status(500).json({
+    error: `Failed to persist updates to the database (${errors.join(' | ')})`
+  });
 }
