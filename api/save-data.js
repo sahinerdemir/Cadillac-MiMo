@@ -1,5 +1,19 @@
 import Redis from 'ioredis';
 
+function createRedisClient(url) {
+  const isTls = typeof url === 'string' && url.startsWith('rediss://');
+  const opts = {
+    maxRetriesPerRequest: 1,
+    connectTimeout: 5000,
+    enableReadyCheck: false,
+    retryStrategy: () => null // do not retry endlessly
+  };
+  if (isTls) {
+    opts.tls = { rejectUnauthorized: false };
+  }
+  return new Redis(url, opts);
+}
+
 export default async function handler(request, response) {
   // CORS Headers
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -50,7 +64,7 @@ export default async function handler(request, response) {
       });
       const restData = await restRes.json();
       if (restData && restData.error) {
-        throw new Error(`REST Error: ${restData.error}`);
+        throw new Error(`REST: ${restData.error}`);
       }
       return response.status(200).json({ message: 'Instructions updated successfully via REST!' });
     } catch (err) {
@@ -59,16 +73,13 @@ export default async function handler(request, response) {
     }
   }
 
-  // 2. Attempt Save via Redis TCP (REDIS_URL) if configured
-  if (process.env.REDIS_URL) {
+  // 2. Attempt Save via KV_URL (Vercel KV standard TCP connection)
+  const tcpUrls = [process.env.KV_URL, process.env.REDIS_URL].filter(Boolean);
+
+  for (const url of tcpUrls) {
     let client;
     try {
-      client = new Redis(process.env.REDIS_URL, {
-        maxRetriesPerRequest: 1,
-        connectTimeout: 5000,
-        enableReadyCheck: false
-      });
-
+      client = createRedisClient(url);
       await client.set("guest_instructions", payloadString);
       return response.status(200).json({ message: 'Instructions updated successfully via Redis TCP!' });
     } catch (err) {
@@ -81,10 +92,10 @@ export default async function handler(request, response) {
     }
   }
 
-  // 3. If neither worked or neither is configured
-  if (!kvUrl && !process.env.REDIS_URL) {
+  // 3. If no DB is configured or all attempts failed
+  if (!kvUrl && tcpUrls.length === 0) {
     return response.status(500).json({
-      error: 'No database configured. Please add REDIS_URL or KV_REST_API_URL to your Vercel Environment Variables.'
+      error: 'No database configured. Please connect Vercel KV or add REDIS_URL to your Vercel project settings.'
     });
   }
 

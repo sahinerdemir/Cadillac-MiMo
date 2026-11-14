@@ -2,6 +2,20 @@ import fs from 'fs';
 import path from 'path';
 import Redis from 'ioredis';
 
+function createRedisClient(url) {
+  const isTls = typeof url === 'string' && url.startsWith('rediss://');
+  const opts = {
+    maxRetriesPerRequest: 1,
+    connectTimeout: 5000,
+    enableReadyCheck: false,
+    retryStrategy: () => null
+  };
+  if (isTls) {
+    opts.tls = { rejectUnauthorized: false };
+  }
+  return new Redis(url, opts);
+}
+
 export default async function handler(request, response) {
   // CORS Headers
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,15 +50,12 @@ export default async function handler(request, response) {
     }
   }
 
-  // 2. Try reading via Redis TCP (REDIS_URL)
-  if (process.env.REDIS_URL) {
+  // 2. Try reading via KV_URL or REDIS_URL
+  const tcpUrls = [process.env.KV_URL, process.env.REDIS_URL].filter(Boolean);
+  for (const url of tcpUrls) {
     let client;
     try {
-      client = new Redis(process.env.REDIS_URL, {
-        maxRetriesPerRequest: 1,
-        connectTimeout: 5000,
-        enableReadyCheck: false
-      });
+      client = createRedisClient(url);
       const data = await client.get("guest_instructions");
       if (data) {
         const parsed = JSON.parse(data);
