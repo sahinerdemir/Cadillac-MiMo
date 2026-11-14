@@ -1,58 +1,53 @@
 import Redis from 'ioredis';
 
 export default async function handler(request, response) {
-  // Simple diagnostic endpoint to inspect DB env vars and test connections
-  const envCheck = {
-    has_KV_REST_API_URL: !!process.env.KV_REST_API_URL,
-    has_KV_REST_API_TOKEN: !!process.env.KV_REST_API_TOKEN,
-    has_KV_URL: !!process.env.KV_URL,
-    has_REDIS_URL: !!process.env.REDIS_URL,
-    has_UPSTASH_REDIS_REST_URL: !!process.env.UPSTASH_REDIS_REST_URL,
-    has_UPSTASH_REDIS_REST_TOKEN: !!process.env.UPSTASH_REDIS_REST_TOKEN,
+  let redisHost = null;
+  let redisPort = null;
+  let redisProto = null;
+
+  if (process.env.REDIS_URL) {
+    try {
+      const u = new URL(process.env.REDIS_URL);
+      redisHost = u.hostname;
+      redisPort = u.port;
+      redisProto = u.protocol;
+    } catch (_) {}
+  }
+
+  const results = {
+    envCheck: {
+      has_KV_REST_API_URL: !!process.env.KV_REST_API_URL,
+      has_KV_URL: !!process.env.KV_URL,
+      has_REDIS_URL: !!process.env.REDIS_URL,
+      redisHost,
+      redisPort,
+      redisProto
+    }
   };
 
-  const results = { envCheck, tests: {} };
-
-  // Test KV REST if present
-  const restUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const restToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (restUrl && restToken) {
-    try {
-      const r = await fetch(restUrl, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${restToken}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify(["PING"])
-      });
-      const data = await r.json();
-      results.tests.rest = { success: true, response: data };
-    } catch (e) {
-      results.tests.rest = { success: false, error: e.message };
-    }
-  }
-
-  // Test KV_URL if present
-  if (process.env.KV_URL) {
-    let c;
-    try {
-      c = new Redis(process.env.KV_URL, { connectTimeout: 3000, maxRetriesPerRequest: 1 });
-      const pong = await c.ping();
-      results.tests.KV_URL = { success: true, pong };
-    } catch (e) {
-      results.tests.KV_URL = { success: false, error: e.message };
-    } finally {
-      if (c) try { c.disconnect(); } catch (_) {}
-    }
-  }
-
-  // Test REDIS_URL if present
+  // Detailed connection attempt with error code
   if (process.env.REDIS_URL) {
     let c;
     try {
-      c = new Redis(process.env.REDIS_URL, { connectTimeout: 3000, maxRetriesPerRequest: 1 });
+      const isTls = redisProto === 'rediss:';
+      c = new Redis(process.env.REDIS_URL, {
+        connectTimeout: 5000,
+        maxRetriesPerRequest: 1,
+        tls: isTls ? { rejectUnauthorized: false } : undefined,
+        retryStrategy: () => null
+      });
+
       const pong = await c.ping();
-      results.tests.REDIS_URL = { success: true, pong };
+      results.test = { success: true, pong };
     } catch (e) {
-      results.tests.REDIS_URL = { success: false, error: e.message };
+      results.test = {
+        success: false,
+        name: e.name,
+        message: e.message,
+        code: e.code,
+        errno: e.errno,
+        syscall: e.syscall
+      };
     } finally {
       if (c) try { c.disconnect(); } catch (_) {}
     }
