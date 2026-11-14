@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadillac MiMo - Admin Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/instructions/admin/style.css">
+  <style>
+    .translate-btn {
+      background: none;
+      border: none;
+      color: #10b981; /* Emerald/Green theme color */
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+    .translate-btn:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    .translate-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .password-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-input-wrapper input {
+      width: 100%;
+      padding-right: 2.75rem;
+    }
+    .toggle-password-btn {
+      position: absolute;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #64748b;
+      font-size: 1rem;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Container -->
+  <div id="loginScreen" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <h1 class="portal-title">Cadillac MiMo</h1>
+        <p class="portal-subtitle">Hotel Directory Admin Portal</p>
+      </div>
+      <form id="loginForm" class="login-form">
+        <div class="input-group">
+          <label for="adminPassword">Access Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="adminPassword" placeholder="Enter admin password (cadillac5201)" required autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false">
+            <button type="button" id="togglePasswordBtn" class="toggle-password-btn" aria-label="Toggle password visibility" title="Show/Hide password">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn login-btn">Sign In</button>
+        <div id="loginError" class="form-error-msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard Container (Hidden by default) -->
+  <div id="adminDashboard" class="dashboard-wrapper hidden">
+    <header class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Stay Directory Manager</h1>
+        <p class="dashboard-subtitle">Update stay information for rooms & guests</p>
+      </div>
+      <button id="logoutBtn" class="logout-btn">Log Out</button>
+    </header>
+
+    <!-- Manager Settings Banner -->
+    <div class="manager-settings-banner">
+      <div class="banner-content">
+        <span class="banner-icon">👤</span>
+        <div class="banner-text">
+          <strong class="banner-title">Hospitality Manager: <span id="currentManagerName">Sweda</span></strong>
+          <span class="banner-desc">Update manager name, phone number, and support hours.</span>
+        </div>
+      </div>
+      <button type="button" class="banner-action-btn" id="toggleManagerBtn">Edit Profile</button>
+    </div>
+
+    <!-- Collapsible Manager Form Panel -->
+    <div id="managerPanel" class="manager-panel">
+      <div class="manager-panel-inner">
+        <h3 class="panel-section-title">Manager Profile Settings</h3>
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="supportName">Manager Name</label>
+            <input type="text" id="supportName" required placeholder="e.g. Sweda">
+          </div>
+          <div class="input-group">
+            <label for="supportPhone">Phone Number</label>
+            <input type="text" id="supportPhone" required placeholder="e.g. 954.812.6528">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="supportWhatsapp">WhatsApp Link (Link / Profile)</label>
+          <input type="text" id="supportWhatsapp" required placeholder="e.g. https://wa.me/19548126528">
+        </div>
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="supportHours">Support Hours</label>
+            <input type="text" id="supportHours" required placeholder="e.g. 09:00 AM – 10:00 PM">
+          </div>
+          <div class="input-group">
+            <label for="supportEmergency">Emergency Policy Note</label>
+            <input type="text" id="supportEmergency" required placeholder="e.g. * 10:00 PM – 9:00 AM for emergencies only">
+          </div>
+        </div>
+        <div class="panel-actions">
+          <button type="button" class="submit-btn close-panel-btn" id="closeManagerBtn">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <form id="directoryForm" class="dashboard-form">
+      
+      <!-- Section 1: Entrance Codes & Wi-Fi -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🗝️ Access Codes & Wi-Fi</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleCodesEn">Section Title (English)</label>
+            <input type="text" id="titleCodesEn" required placeholder="e.g. Entrance Codes & Wi-Fi">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleCodesEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleCodesEn', 'titleCodesEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titleCodesEs" required placeholder="e.g. Códigos de acceso y Wi-Fi">
+          </div>
+        </div>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="gateCode">Gate Code</label>
+            <input type="text" id="gateCode" required placeholder="e.g. 001207">
+          </div>
+          <div class="input-group">
+            <label for="wifiNetwork">Wi-Fi Network Name</label>
+            <input type="text" id="wifiNetwork" required placeholder="e.g. 5201Guest">
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="wifiPassword">Wi-Fi Password</label>
+          <input type="text" id="wifiPassword" required placeholder="e.g. welcome5201**">
+        </div>
+
+        <div style="margin: 1.5rem 0 1rem 0; height: 1px; background-color: var(--color-border);"></div>
+        <h4 style="margin: 0 0 1rem 0; font-family: var(--font-display); color: var(--color-text-dark); font-size: 0.95rem;">Additional Wi-Fi Networks</h4>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="wifiNetwork1">Network 1 Name</label>
+            <input type="text" id="wifiNetwork1" required placeholder="e.g. WI-TEK_75a4">
+          </div>
+          <div class="input-group">
+            <label for="wifiPassword1">Network 1 Password</label>
+            <input type="text" id="wifiPassword1" required placeholder="e.g. 88888888">
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="wifiNetwork2">Network 2 Name</label>
+            <input type="text" id="wifiNetwork2" required placeholder="e.g. WI-TEK_1f46">
+          </div>
+          <div class="input-group">
+            <label for="wifiPassword2">Network 2 Password</label>
+            <input type="text" id="wifiPassword2" required placeholder="e.g. 88888888">
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="wifiNetwork3">Network 3 Name</label>
+            <input type="text" id="wifiNetwork3" required placeholder="e.g. WI-TEK_322C">
+          </div>
+          <div class="input-group">
+            <label for="wifiPassword3">Network 3 Password</label>
+            <input type="text" id="wifiPassword3" required placeholder="e.g. 88888888">
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="wifiNetwork4">Network 4 Name</label>
+            <input type="text" id="wifiNetwork4" required placeholder="e.g. WI-TEK_7274">
+          </div>
+          <div class="input-group">
+            <label for="wifiPassword4">Network 4 Password</label>
+            <input type="text" id="wifiPassword4" required placeholder="e.g. 88888888">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Section 2: Property Information -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🏨 Property Info & Guidelines</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titlePropertyEn">Section Title (English)</label>
+            <input type="text" id="titlePropertyEn" required placeholder="e.g. Property Information">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titlePropertyEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titlePropertyEn', 'titlePropertyEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titlePropertyEs" required placeholder="e.g. Información de la propiedad">
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="infoLaundry">Laundry Room Rules</label>
+          <textarea id="infoLaundry" rows="2" required></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="infoTrash">Trash Disposal</label>
+          <textarea id="infoTrash" rows="2" required></textarea>
+        </div>
+        
+        <div class="input-group">
+          <label for="infoPark">Morningside Park Access</label>
+          <textarea id="infoPark" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoHotWater">Hot Water System Guidelines</label>
+          <textarea id="infoHotWater" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoSmoking">Smoking Policy</label>
+          <textarea id="infoSmoking" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoPackage">Package Deliveries</label>
+          <textarea id="infoPackage" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="infoParking">Parking Rules</label>
+          <textarea id="infoParking" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 3: Housekeeping Rates -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🧹 Housekeeping & Stays</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleHkEn">Section Title (English)</label>
+            <input type="text" id="titleHkEn" required placeholder="e.g. Housekeeping & Stays">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleHkEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleHkEn', 'titleHkEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titleHkEs" required placeholder="e.g. Limpieza y estadías">
+          </div>
+        </div>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="hkStudio">Studio Rate ($)</label>
+            <input type="number" id="hkStudio" required min="0">
+          </div>
+          <div class="input-group">
+            <label for="hkOneBed">One-Bedroom Rate ($)</label>
+            <input type="number" id="hkOneBed" required min="0">
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="hkTwoBed">Two-Bedroom Rate ($)</label>
+            <input type="number" id="hkTwoBed" required min="0">
+          </div>
+          <div class="input-group">
+            <label for="hkExtraTowel">Extra Towel Cost ($)</label>
+            <input type="number" id="hkExtraTowel" required min="0">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="hkLongTerm">Long-Term Stay Policy Description</label>
+          <textarea id="hkLongTerm" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 4: House Rules & Safety -->
+      <fieldset class="form-section">
+        <legend class="section-legend">📜 House Rules & Safety</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleRulesEn">Section Title (English)</label>
+            <input type="text" id="titleRulesEn" required placeholder="e.g. House Rules & Safety">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleRulesEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleRulesEn', 'titleRulesEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titleRulesEs" required placeholder="e.g. Reglas de la casa y seguridad">
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label for="rulesQuiet">Quiet Hours</label>
+          <input type="text" id="rulesQuiet" required placeholder="e.g. 10:00 PM – 7:00 AM">
+        </div>
+
+        <div class="input-group">
+          <label for="rulesCheckout">Check-out Time</label>
+          <input type="text" id="rulesCheckout" required placeholder="e.g. Before 11:00 AM">
+        </div>
+
+        <div class="input-group">
+          <label for="rulesAc">AC Guidelines</label>
+          <textarea id="rulesAc" rows="2" required></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="rulesSecurity">Security & Damage Policy</label>
+          <textarea id="rulesSecurity" rows="2" required></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Section 5: Guest Support & Contacts -->
+      <fieldset class="form-section">
+        <legend class="section-legend">📞 Guest Support & Contact Options</legend>
+        
+        <div class="grid-2-col" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--color-border);">
+          <div class="input-group">
+            <label for="titleSupportEn">Section Title (English)</label>
+            <input type="text" id="titleSupportEn" required placeholder="e.g. Guest Support & Help">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleSupportEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleSupportEn', 'titleSupportEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titleSupportEs" required placeholder="e.g. Soporte para huéspedes y ayuda">
+          </div>
+        </div>
+        
+        <p class="section-help-text">Manager profile parameters (Name, Phone, WhatsApp link, and Support hours) are configured inside the <strong>Hospitality Manager Settings</strong> banner at the top of this page.</p>
+      </fieldset>
+
+      <!-- Section 6: Local Guide Section Title -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🗺️ Local Guide Section Title</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="titleGuideEn">Section Title (English)</label>
+            <input type="text" id="titleGuideEn" required placeholder="e.g. Local Guide & Explore">
+          </div>
+          <div class="input-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <label for="titleGuideEs" style="margin-bottom: 0;">Section Title (Spanish)</label>
+              <button type="button" class="translate-btn" onclick="translateField('titleGuideEn', 'titleGuideEs')">⚡ Auto-Translate</button>
+            </div>
+            <input type="text" id="titleGuideEs" required placeholder="e.g. Guía local y exploración">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Section 6: Social Media Links -->
+      <fieldset class="form-section">
+        <legend class="section-legend">🔗 Social Media Accounts</legend>
+        
+        <div class="grid-2-col">
+          <div class="input-group">
+            <label for="socialInstagram">Instagram Link</label>
+            <input type="url" id="socialInstagram" required placeholder="e.g. https://instagram.com/cadillacmimo">
+          </div>
+          <div class="input-group">
+            <label for="socialFacebook">Facebook Link</label>
+            <input type="url" id="socialFacebook" required placeholder="e.g. https://facebook.com/cadillacmimo">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Sticky Save Banner -->
+      <div class="save-bar-placeholder"></div>
+      <div class="save-bar">
+        <div class="save-bar-content">
+          <span class="save-status" id="saveStatus">Changes are local. Press Save to push online.</span>
+          <button type="submit" class="submit-btn save-btn" id="saveBtn">Save Stay Information</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript file -->
+  <script src="/instructions/admin/app.js"></script>
+</body>
+</html>

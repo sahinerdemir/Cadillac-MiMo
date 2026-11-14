@@ -32,23 +32,66 @@ function checkAuth() {
 }
 
 /**
- * 2. Login Submit Handler
+ * 2. Login Submit Handler (Server-Verified Auth)
  */
 function initLoginForm() {
   const form = document.getElementById('loginForm');
   const passwordInput = document.getElementById('adminPassword');
+  const submitBtn = form.querySelector('button[type="submit"]');
   const errorEl = document.getElementById('loginError');
+  const toggleBtn = document.getElementById('togglePasswordBtn');
+
+  if (toggleBtn && passwordInput) {
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggleBtn.textContent = isPassword ? '🙈' : '👁️';
+    });
+  }
   
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.textContent = '';
     
     const password = passwordInput.value.trim();
-    if (!password) return;
+    if (!password) {
+      errorEl.textContent = 'Please enter the admin password.';
+      return;
+    }
     
-    // Save password in sessionStorage and attempt auth through data pull/push
-    sessionStorage.setItem('adminPassword', password);
-    checkAuth();
+    // Show verifying state
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Verifying...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/verify-auth', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${password}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'Incorrect password. Access denied.');
+      }
+
+      // Store validated password in sessionStorage
+      sessionStorage.setItem('adminPassword', password);
+      passwordInput.value = '';
+      checkAuth();
+      showToast('Signed in successfully.');
+    } catch (err) {
+      errorEl.textContent = err.message || 'Incorrect password. Access denied.';
+      showToast(err.message || 'Incorrect password.', true);
+      passwordInput.focus();
+    } finally {
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+    }
   });
 }
 
@@ -286,7 +329,29 @@ function initDirectoryForm() {
       });
 
       if (response.status === 401) {
-        // Unauthorized password error
+        // Password failed - offer immediate recovery prompt so changes aren't lost
+        const retryPassword = prompt('Password rejected by server. Please enter the admin password (cadillac5201) to save your changes:');
+        if (retryPassword && retryPassword.trim()) {
+          const cleanRetry = retryPassword.trim();
+          const retryRes = await fetch('/api/save-data', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${cleanRetry}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (retryRes.ok) {
+            sessionStorage.setItem('adminPassword', cleanRetry);
+            statusEl.textContent = 'All changes pushed online.';
+            statusEl.className = 'save-status success';
+            showToast('Settings saved successfully!');
+            return;
+          }
+        }
+
+        // Unauthorized: session reset
         sessionStorage.removeItem('adminPassword');
         document.getElementById('adminPassword').value = '';
         checkAuth();

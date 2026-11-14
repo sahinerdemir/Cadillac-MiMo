@@ -28,11 +28,13 @@ export default async function handler(request, response) {
   }
 
   // Validate authentication
-  const authHeader = request.headers.authorization;
-  const password = authHeader ? authHeader.replace('Bearer ', '') : '';
-  const adminPassword = process.env.ADMIN_PASSWORD || 'cadillac5201';
+  const authHeader = request.headers.authorization || '';
+  const password = authHeader.replace(/^Bearer\s+/i, '').trim();
+  const adminPassword = (process.env.ADMIN_PASSWORD || 'cadillac5201').trim();
 
-  if (password !== adminPassword) {
+  const isMatch = password && (password === adminPassword || password.toLowerCase() === adminPassword.toLowerCase());
+
+  if (!isMatch) {
     return response.status(401).json({ error: 'Unauthorized: Incorrect password' });
   }
 
